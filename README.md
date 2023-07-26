@@ -1,6 +1,4 @@
-# Quasar App (package-lib)
-
-A Quasar Project
+## scmgenai-chatui
 
 ## Install the dependencies
 ```bash
