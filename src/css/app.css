@@ -1,0 +1,10 @@
+/* app global css */
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b2b2b2c1;
+  border-radius: 80px;
+}
