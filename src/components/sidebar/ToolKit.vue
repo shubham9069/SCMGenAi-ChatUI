@@ -16,45 +16,47 @@
       </div>
     </section>
 
-    <template v-for="section in toolkitItems" :key="section.section">
-      <template v-if="section.section == 'Section 1'">
-        <component
-          :is="IconComponent"
-          v-for="item in section.items"
-          :key="item.label"
-          :item="item"
-          @click="ActiveComponent(item.label, item.Component, item.Props)"
-          :isVisible="isVisible"
-          :selectedLabel="selectedLabel"
-        >
-        </component>
-        <div class="line" />
-      </template>
+    <div>
+      <template v-for="section in toolkitItems" :key="section.section">
+        <template v-if="section.section == 'Section 1'">
+          <component
+            :is="IconComponent"
+            v-for="item in section.items"
+            :key="item.label"
+            :item="item"
+            @click="ActiveComponent(item.label, item.Component, item.Props)"
+            :isVisible="isVisible"
+            :selectedLabel="selectedLabel"
+          >
+          </component>
+          <div class="line" />
+        </template>
 
-      <template v-if="section.section == 'Section 2'">
-        <component
-          :is="IconComponent"
-          v-for="item in section.items"
-          :key="item.label"
-          :item="item"
-          :isVisible="isVisible"
-          :selectedLabel="selectedLabel"
-        >
-        </component>
-        <div class="line" />
+        <template v-if="section.section == 'Section 2'">
+          <component
+            :is="IconComponent"
+            v-for="item in section.items"
+            :key="item.label"
+            :item="item"
+            :isVisible="isVisible"
+            :selectedLabel="selectedLabel"
+          >
+          </component>
+          <div class="line" />
+        </template>
+        <template v-if="section.section == 'Section 3'">
+          <component
+            :is="IconComponent"
+            v-for="item in section.items"
+            :key="item.label"
+            :item="item"
+            :isVisible="isVisible"
+            :selectedLabel="selectedLabel"
+          >
+          </component>
+        </template>
       </template>
-      <template v-if="section.section == 'Section 3'">
-        <component
-          :is="IconComponent"
-          v-for="item in section.items"
-          :key="item.label"
-          :item="item"
-          :isVisible="isVisible"
-          :selectedLabel="selectedLabel"
-        >
-        </component>
-      </template>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -67,7 +69,7 @@ import IconComponentVue from "./IconComponent.vue";
 /* eslint-disable vue/no-unused-components */
 export default {
   name: "ToolKit",
-  emits: ["closeSidebar"],
+  emits: ["closeSidebar", "splitter"],
   components: {},
   data() {
     return {
@@ -200,6 +202,7 @@ export default {
         this.isVisible = true;
       }
       this.selectedLabel = label;
+      this.$emit("splitter", this.isVisible);
     },
   },
 };
@@ -214,9 +217,10 @@ export default {
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   /* background: grey; */
   height: 100vh;
-  width: fit-content;
-  margin-left: auto;
-  position: relative;
+  display: flex;
+
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .sidebar .line {
@@ -226,14 +230,9 @@ export default {
 }
 
 .sidebox {
-  min-width: 342px;
-  max-width: 342px;
   height: 100%;
 
-  width: max-content;
-  position: absolute;
-  top: 0;
-  right: 100%;
+  width: 100%;
 }
 
 .sidebox > .bottom {

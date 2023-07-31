@@ -28,14 +28,14 @@ export default {
 
 <style>
 @import "../../css/variable.css";
-.sidebar > .sidebaricon {
+.sidebar .sidebaricon {
   padding: 8px;
   border-radius: 3px;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-.sidebar > .sidebaricon > img {
+.sidebar .sidebaricon > img {
   width: var(--hds-chatbox-header-logo-width);
   height: var(--hds-chatbox-header-logo-height);
 }

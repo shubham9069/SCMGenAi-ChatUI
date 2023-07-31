@@ -1,44 +1,13 @@
 <template>
   <div class="wrapper-ai">
     <div class="chat-ai">
-      <div class="chat-profile-info">
-        <div class="profile-icon" style="padding: 5px">
-          <img :src="chatBoxStyle?.logo" alt="" />
-        </div>
-        <div class="ai-profile-head">
-          <div class="profile-info">
-            <span class="user-name">Ai Logi </span>
-            <span class="chat-date">16 May, 2:44 PM</span>
-          </div>
-        </div>
-        <div class="three-dot">
-          <svg
-            @click="this.DropDown_Toggle = !this.DropDown_Toggle"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="menu_dots_horizontal">
-              <path
-                id="Union"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M6.75 12C6.75 12.9665 5.9665 13.75 5 13.75C4.0335 13.75 3.25 12.9665 3.25 12C3.25 11.0335 4.0335 10.25 5 10.25C5.9665 10.25 6.75 11.0335 6.75 12ZM12 13.75C12.9665 13.75 13.75 12.9665 13.75 12C13.75 11.0335 12.9665 10.25 12 10.25C11.0335 10.25 10.25 11.0335 10.25 12C10.25 12.9665 11.0335 13.75 12 13.75ZM19 13.75C19.9665 13.75 20.75 12.9665 20.75 12C20.75 11.0335 19.9665 10.25 19 10.25C18.0335 10.25 17.25 11.0335 17.25 12C17.25 12.9665 18.0335 13.75 19 13.75Z"
-                fill="#656C78"
-              />
-            </g>
-          </svg>
-
-          <!-- // dropdown component -->
-          <component
-            :is="DropDown"
-            :DropDown_Toggle="DropDown_Toggle"
-            :List="['OperationX', 'OperationY']"
-          />
-        </div>
-      </div>
+      <component
+        :is="ChatHeader"
+        :userDetails="{ name: 'Ai Logo', image: chatBoxStyle?.logo }"
+        type="Ai"
+        :collapseChat="collapseChat"
+        @Collapse="this.collapseChat = !this.collapseChat"
+      />
 
       <div class="loading-animation" v-if="message.isDisabled">
         <div class="item">
@@ -48,15 +17,14 @@
           <div class="skeleton content"></div>
         </div>
       </div>
-      <div class="linegrey" />
-      <div>
-        <div
+
+      <div v-if="collapseChat">
+        <component
+          :is="ChatContainer"
+          :message="message"
           v-if="!message?.isChatActionArea"
-          class="message"
-          :id="message?.id"
-        >
-          {{ message?.text }}
-        </div>
+        />
+
         <div class="chatAction" v-if="message?.isChatActionArea">
           <p>{{ message?.areaActionButtonOption?.title }}</p>
           <div class="center-div">
@@ -97,6 +65,7 @@
           </div>
         </div>
       </div>
+      <component :is="ChatFooter" />
     </div>
     <div class="suggestion-box">
       <!-- suggestion component -->
@@ -112,16 +81,17 @@
 <script>
 import { markRaw } from "vue";
 import SuggestionVue from "./Suggestion.vue";
-import DropDownVue from "./DropDown.vue";
-
 import TagbuttonVue from "./Tagbutton.vue";
+import ChatHeaderVue from "./ChatHeader.vue";
+
+import ChatContainerVue from "./ChatContainer.vue";
+import ChatFooterVue from "./ChatFooter.vue";
 
 export default {
   name: "WrapperAi",
   emits: ["isChatActionArea", "TogglePin"],
   components: {
     SuggestionVue,
-    DropDownVue,
     TagbuttonVue,
   },
   props: {
@@ -130,11 +100,13 @@ export default {
   },
   data() {
     return {
-      DropDown_Toggle: false,
       Suggestion: markRaw(SuggestionVue),
-      DropDown: markRaw(DropDownVue),
       PinToggle: false,
+      collapseChat: true,
       Tagbutton: markRaw(TagbuttonVue),
+      ChatHeader: markRaw(ChatHeaderVue),
+      ChatContainer: markRaw(ChatContainerVue),
+      ChatFooter: markRaw(ChatFooterVue),
     };
   },
   methods: {
@@ -163,32 +135,6 @@ export default {
   border-radius: var(--hds-chatbox-warpper-input-border-radius);
   padding: var(--hds-chatbox-container-message-padding);
   position: relative;
-}
-
-.wrapper-ai .ai-profile-head {
-  display: grid;
-  grid-template-columns: var(
-    --hds-chatbox-warpper-profile-head-grid-template-columns
-  );
-
-  width: var(--hds-chatbox-warpper-profile-head-width);
-}
-
-.wrapper-ai .message {
-  color: var(--hds-chatbox-warpper-message-color);
-  font-style: normal;
-  font-weight: var(--hds-chatbox-warpper-message-font-weight);
-  font-size: var(--hds-chatbox-warpper-message-font-size);
-  max-width: 100%;
-  white-space: pre-line;
-  padding-top: 8px;
-}
-.wrapper-ai > .chat-ai > .linegrey {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 0.5px;
-  background: #d0d7de;
 }
 
 .wrapper-ai .message.bot-message {
@@ -241,44 +187,10 @@ export default {
   width: 100%;
   margin-bottom: 8px;
 }
-.three-dot {
-  position: relative;
-  cursor: pointer;
-}
-
-.post-dropdown {
-  padding: 0.5rem !important;
-  width: max-content;
-  min-width: 110px;
-  position: absolute;
-  z-index: 111;
-  top: 10px;
-  background: white;
-  right: 0;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-.post-dropdown p {
-  font-size: 12px;
-  margin: 0 !important;
-}
-.post-dropdown > li {
-  padding: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.post-dropdown > li:hover {
-  background-color: #eef6ff;
-}
-.post-dropdown > li:hover p {
-  color: #00a3ff !important;
-}
 
 .chatAction {
   padding: 12px 16px;
-  margin-top: 1rem;
+  margin: 1rem 0;
   border: var(--hds-sidebar-border);
   border-radius: 8px;
 }
