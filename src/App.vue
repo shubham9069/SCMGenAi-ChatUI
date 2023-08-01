@@ -18,10 +18,7 @@
     </template>
 
     <template v-slot:after>
-      <SCMChatApp
-        :userDetails="userDetails"
-        @splitter="(value) => console.log(value)"
-      />
+      <SCMChatApp :userDetails="userDetails" />
     </template>
   </q-splitter>
 
@@ -29,11 +26,12 @@
 </template>
 
 <script>
-import { SCMChatApp } from "SCM-UI-library";
+import { SCMChatApp } from "scm-ui";
 import { ref } from "vue";
 import { markRaw } from "vue";
 
 /* eslint-disable vue/no-unused-components */
+
 export default {
   name: "App",
   components: {
