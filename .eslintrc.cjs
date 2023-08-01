@@ -18,7 +18,7 @@ module.exports = {
   // Rules order is important, please avoid shuffling them
   extends: [
     // Base ESLint recommended rules
-    // "eslint:recommended",
+    // 'eslint:recommended',
 
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
@@ -60,7 +60,7 @@ module.exports = {
     "prefer-promise-reject-errors": "off",
     // indent: ["error", 2], //  use 2 spaces for indentation.
 
-    semi: ["error", "always"], //use semicolons at the end of statements or not
+    // semi: ["error", "always"], //use semicolons at the end of statements or not
     // quotes: ["error", "single"],
     // "space-before-function-paren": ["error", "always"],
     // "no-unused-vars": "error"

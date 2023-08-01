@@ -13,14 +13,17 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const { configure } = require("quasar/wrappers");
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const PostCSSPlugin = require("postcss");
 
 module.exports = configure(function (ctx) {
   return {
     chainWebpack(config) {
+      // Set Vue compiler options using vueCompiler property
+
       config.resolve.symlinks(false);
       config.resolve.alias.set("vue", path.resolve("./node_modules/vue"));
+      chain.externals({
+        vue: "Vue", // its neccasary to use component modularity in code
+      });
     },
     extendWebpack(cfg) {
       cfg.module.rules.push({
@@ -37,7 +40,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
-    boot: [],
+    boot: ["axios"],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
     css: ["app.css"],
@@ -61,11 +64,11 @@ module.exports = configure(function (ctx) {
       vueRouterMode: "hash", // available values: 'hash', 'history'
 
       // transpile: false,
-      // publicPath: "src/components/index.js",
+      // publicPath: '/',
 
       extendWebpack(cfg) {
         // Input and output
-        cfg.entry.app = "./src/components/index.js";
+        cfg.entry.app = "./src/index.js";
         cfg.output = {
           path: path.resolve(__dirname, "dist"),
           filename: "lib-[id].js",
@@ -95,8 +98,13 @@ module.exports = configure(function (ctx) {
           exclude: /node_modules/,
           loader: "babel-loader",
         });
-      },
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias, // This adds the existing alias
 
+          // This will make sure that the hosting test app is pointing to only one instance of vue.
+          vue: path.resolve("./node_modules/vue"),
+        };
+      },
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
       // Applies only if "transpile" is set to true.
@@ -257,7 +265,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "package-lib",
+        appId: "scm-ui",
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain

@@ -1,26 +1,15 @@
 <template>
   <div class="wrapper-ai">
     <div class="chat-ai">
-      <component
-        :is="ChatHeader"
+      <SCMChatHeader
         :userDetails="{ name: 'Ai Logo', image: chatBoxStyle?.logo }"
         type="Ai"
         :collapseChat="collapseChat"
         @Collapse="this.collapseChat = !this.collapseChat"
       />
 
-      <div class="loading-animation" v-if="message.isDisabled">
-        <div class="item">
-          <div class="skeleton title"></div>
-          <div class="skeleton content"></div>
-          <div class="skeleton content"></div>
-          <div class="skeleton content"></div>
-        </div>
-      </div>
-
       <div v-if="collapseChat">
-        <component
-          :is="ChatContainer"
+        <SCMChatContainer
           :message="message"
           v-if="!message?.isChatActionArea"
         />
@@ -29,8 +18,7 @@
           <p>{{ message?.areaActionButtonOption?.title }}</p>
           <div class="center-div">
             <!-- for cutsom color you have to use inline css Button component  -->
-            <component
-              :is="Tagbutton"
+            <SCMTagbutton
               style="background: #e6f7ff; color: #005ac2; border-radius: 27px"
               :buttonDetails="{
                 Icon: message?.areaActionButtonOption?.secondaryButtonIcon,
@@ -38,18 +26,16 @@
               }"
             />
 
-            <component
-              :is="Tagbutton"
+            <SCMTagbutton
               v-if="!this.PinToggle"
               @click="PinToggle = true"
               style="background: #0074e8; border-radius: 27px; color: white"
               :buttonDetails="{
-                Icon: message?.areaActionButtoitnOption?.primaryButtonIcon,
+                Icon: message?.areaActionButtonOption?.primaryButtonIcon,
                 Text: message?.areaActionButtonOption?.primaryButtonText,
               }"
             />
-            <component
-              :is="Tagbutton"
+            <SCMTagbutton
               v-else
               @click="PinToggle = false"
               style="
@@ -65,12 +51,11 @@
           </div>
         </div>
       </div>
-      <component :is="ChatFooter" />
+      <SCMChatFooter />
     </div>
     <div class="suggestion-box">
       <!-- suggestion component -->
-      <component
-        :is="Suggestion"
+      <SCMPromptSuggestion
         @click="$emit('isChatActionArea', message?.id)"
         v-bind="{ title: 'Make This Widget' }"
       />
@@ -80,19 +65,21 @@
 
 <script>
 import { markRaw } from "vue";
-import SuggestionVue from "./Suggestion.vue";
-import TagbuttonVue from "./Tagbutton.vue";
-import ChatHeaderVue from "./ChatHeader.vue";
-
-import ChatContainerVue from "./ChatContainer.vue";
-import ChatFooterVue from "./ChatFooter.vue";
+import SCMChatHeader from "../chatconversation/SCMChatHeader.vue";
+import SCMChatFooter from "../chatconversation/SCMChatFooter.vue";
+import SCMChatContainer from "../chatconversation/SCMChatContainer.vue";
+import SCMTagbutton from "src/components/common/SCMTagbutton.vue";
+import SCMPromptSuggestion from "../common/SCMPromptSuggestion.vue";
 
 export default {
   name: "WrapperAi",
   emits: ["isChatActionArea", "TogglePin"],
   components: {
-    SuggestionVue,
-    TagbuttonVue,
+    SCMChatHeader,
+    SCMChatFooter,
+    SCMChatContainer,
+    SCMTagbutton,
+    SCMPromptSuggestion,
   },
   props: {
     chatBoxStyle: Object,
@@ -100,13 +87,8 @@ export default {
   },
   data() {
     return {
-      Suggestion: markRaw(SuggestionVue),
       PinToggle: false,
       collapseChat: true,
-      Tagbutton: markRaw(TagbuttonVue),
-      ChatHeader: markRaw(ChatHeaderVue),
-      ChatContainer: markRaw(ChatContainerVue),
-      ChatFooter: markRaw(ChatFooterVue),
     };
   },
   methods: {
@@ -118,7 +100,7 @@ export default {
 </script>
 
 <style>
-@import "../../css/variable.css";
+@import "../../../css/variable.css";
 .wrapper-ai {
   width: var(--hds-chatbox-warpper-input-width);
   display: flex;
@@ -134,6 +116,8 @@ export default {
   border: var(--hds-chatbox-warpper-input-border);
   border-radius: var(--hds-chatbox-warpper-input-border-radius);
   padding: var(--hds-chatbox-container-message-padding);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   position: relative;
 }
 
@@ -145,47 +129,6 @@ export default {
   align-items: center;
   gap: var(--hds-chatbox-chat-profile-gap);
   padding-bottom: 8px;
-}
-
-.loading-animation .item {
-  vertical-align: top;
-  background: #ffffff;
-  border-radius: 3px;
-  padding: 16px;
-  width: 100%;
-}
-
-@keyframes placeHolderShimmer {
-  0% {
-    background-position: -500px 0;
-  }
-  100% {
-    background-position: 500px 0;
-  }
-}
-
-.loading-animation .skeleton {
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: placeHolderShimmer;
-  animation-timing-function: linear;
-  background: #f6f7f8;
-  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-  background-size: 1200px 100px;
-}
-
-.loading-animation .title {
-  height: 20px;
-  width: 200px;
-  margin-top: 8px;
-  margin-bottom: 26px;
-}
-
-.loading-animation .content {
-  height: 20px;
-  width: 100%;
-  margin-bottom: 8px;
 }
 
 .chatAction {
