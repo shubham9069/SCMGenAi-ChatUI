@@ -1,25 +1,41 @@
-# Quasar App (demo-application)
+# Quasar App (scmgenai-ref-app)
 
 A Quasar Project
 
 ## Install the dependencies
 ```bash
-
+yarn
+# or
 npm install
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-npm run dev 
+quasar dev
 ```
-### install dependencies
+
+
+### Lint the files
 ```bash
-
-npm link SCM-UI-library
+yarn lint
+# or
+npm run lint
 ```
-### replace this code with src/App.vue
+
+
+### Format the files
 ```bash
-
+yarn format
+# or
+npm run format
 ```
 
 
+
+### Build the app for production
+```bash
+quasar build
+```
+
+### Customize the configuration
+See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).

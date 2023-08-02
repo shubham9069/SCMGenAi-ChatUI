@@ -26,7 +26,8 @@
 </template>
 
 <script>
-import { SCMGenAIChatApp } from "scm-ui";
+import { SCMGenAIChatApp, storedata } from "scm-ui";
+
 import { ref } from "vue";
 import { markRaw } from "vue";
 
