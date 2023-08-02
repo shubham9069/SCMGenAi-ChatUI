@@ -18,7 +18,7 @@
     </template>
 
     <template v-slot:after>
-      <SCMChatApp :userDetails="userDetails" />
+      <SCMGenAIChatApp :userDetails="userDetails" />
     </template>
   </q-splitter>
 
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { SCMChatApp } from "scm-ui";
+import { SCMGenAIChatApp } from "scm-ui";
 import { ref } from "vue";
 import { markRaw } from "vue";
 
@@ -35,7 +35,7 @@ import { markRaw } from "vue";
 export default {
   name: "App",
   components: {
-    SCMChatApp,
+    SCMGenAIChatApp,
   },
   setup() {
     return {
