@@ -3,7 +3,8 @@
     class="chatdrawer-icon"
     :style="{
       background: `${
-        isVisible && item?.label == selectedLabel
+        store.state.storedata.isVisible &&
+        item?.label == store.state.storedata.selectedLabel
           ? 'linear-gradient(135deg, #0074E8 0%, #A933FB 100%)'
           : 'transparent'
       }`,
@@ -11,7 +12,8 @@
   >
     <img
       :src="
-        isVisible && item?.label == selectedLabel
+        store.state.storedata.isVisible &&
+        item?.label == store.state.storedata.selectedLabel
           ? item?.selectedIcon
           : item?.icon
       "
@@ -20,13 +22,17 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
 export default {
+  setup() {
+    const store = useStore();
+
+    return { store };
+  },
   name: "GenAIChatDrawerIcon",
   props: {
-  item :Object,
-  isVisible:Boolean,
-  selectedLabel:String
-  }
+    item: Object,
+  },
 };
 </script>
 
