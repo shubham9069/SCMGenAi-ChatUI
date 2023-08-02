@@ -1,17 +1,17 @@
 <template>
-  <SCMTopBar @close="$emit('close')" :chatBoxHeader="chatBoxHeader" />
+  <GenAIChatHeader @close="$emit('close')" :chatBoxHeader="chatBoxHeader" />
   <div class="chat-box">
     <h5>{{ Content }}</h5>
   </div>
 </template>
 
 <script>
-import SCMTopBar from "../common/SCMTopBar.vue";
+import GenAIChatHeader from "../header/GenAIChatHeader.vue";
 
 export default {
-  name: "SCMRecentEntry",
+  name: "GenAIChatRecent",
   components: {
-    SCMTopBar,
+    GenAIChatHeader,
   },
   props: {
     chatBoxHeader: {

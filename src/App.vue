@@ -1,21 +1,21 @@
 <template>
-  <SCMToolBar :userDetails="userDetails" />
+  <GenAIChatDrawer :userDetails="userDetails" />
 </template>
 
 <script>
-import SCMToolBar from "./components/scmtoolbar/SCMToolBarEntry.vue";
+import GenAIChatDrawer from "./components/genaichat/GenAIChatDrawer.vue";
 import { ref } from "vue";
 /* eslint-disable vue/no-unused-components */
 
 export default {
   name: "app",
-  props: ["userDetails"],
+  props: {
+  userDetails:Object
+},
   components: {
-    SCMToolBar,
+    GenAIChatDrawer,
   },
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="message" :id="message?.id" v-if="message.isDisabled">
+  <div class="message" :id="message?.id" v-if="!message.isDisabled">
     {{ message?.text }}
   </div>
   <div class="message" v-else>
@@ -13,8 +13,8 @@
 
 <script>
 export default {
-  name: "SCMChatContainer",
-  props: ["message"],
+  name: "GenAIChatMessageContainer",
+  props: { message: Object },
 };
 </script>
 

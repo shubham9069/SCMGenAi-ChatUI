@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "SCMTagbutton",
+  name: "GenAIChatTagbutton",
   props: {
     buttonDetails: Object,
   },
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style>
-@import "../../css/variable.css";
+@import "../../../../assets/css/variable.css";
 .tag-button {
   padding: var(--hds-chatbox-TagButton-padding);
   font-weight: var(--hds-chatbox-TagButton-font-weight);

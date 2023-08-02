@@ -1,9 +1,9 @@
 <template>
   <div class="chat-ui">
-    <div class="chat_container chat-box" id="chatcontainer">
+    <div class="chat-container chat-landing" id="chatcontainer">
       <template v-for="(message, index) in chatMessages" :key="index">
         <!-- wrapper Ai component  -->
-        <SCMWrapperAi
+        <GenAIChatMessageAI
           v-if="message?.isAI"
           :message="message"
           :chatBoxStyle="chatBoxStyle"
@@ -11,12 +11,16 @@
         />
 
         <!-- wrapper User Component  -->
-        <SCMWrapperUser v-else :message="message" :userDetails="userDetails" />
+        <GenAIChatMessageUser
+          v-else
+          :message="message"
+          :userDetails="userDetails"
+        />
       </template>
     </div>
 
     <!-- inputBar Component  -->
-    <SCMChatUiInputBar
+    <GenAIChatUInputBar
       inputBoxPlaceholder="Ask your data question"
       @message="(msg) => this.$emit('sentmessage', msg)"
     />
@@ -24,17 +28,17 @@
 </template>
 
 <script>
-import SCMWrapperAi from "./SCMWrapperAi.vue";
-import SCMWrapperUser from "./SCMWrapperUser.vue";
-import SCMChatUiInputBar from "./SCMChatUiInputBar.vue";
+import GenAIChatMessageAI from "./content/chatconversation/GenAIChatMessageAI.vue";
+import GenAIChatMessageUser from "./content/chatconversation/GenAIChatMessageUser.vue";
+import GenAIChatUInputBar from "./content/chatui/GenAIChatUInputBar.vue";
 
 export default {
-  name: "SCMChatUi",
+  name: "GenAIChatUI",
   emits: ["isChatActionArea", "sentmessage"],
   components: {
-    SCMWrapperAi,
-    SCMWrapperUser,
-    SCMChatUiInputBar,
+    GenAIChatMessageAI,
+    GenAIChatMessageUser,
+    GenAIChatUInputBar,
   },
   props: {
     chatMessages: Array,
@@ -60,7 +64,7 @@ export default {
   display: none;
 }
 
-.chat-ui .chat-box {
+.chat-ui .chat-landing {
   width: var(--hds-chatbox-width);
   display: flex;
   flex-direction: column;
@@ -68,7 +72,7 @@ export default {
   padding: var(--hds-chatbox-padding);
   gap: var(--hds-chatbox-gap);
 }
-.chat_container {
+.chat-container {
   flex: 1;
   width: 100%;
 
@@ -81,11 +85,11 @@ export default {
   scroll-behavior: smooth;
 }
 
-.chat_container::-webkit-scrollbar {
+.chat-container::-webkit-scrollbar {
   display: block;
 }
 
-.chat_container::-webkit-scrollbar-thumb {
+.chat-container::-webkit-scrollbar-thumb {
   background: #b2b2b2c1;
   border-radius: 80px;
 }

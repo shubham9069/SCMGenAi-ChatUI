@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sidebaricon"
+    class="chatdrawer-icon"
     :style="{
       background: `${
         isVisible && item?.label == selectedLabel
@@ -21,21 +21,25 @@
 
 <script>
 export default {
-  name: "SCMToolBarIcon",
-  props: ["item", "isVisible", "selectedLabel"],
+  name: "GenAIChatDrawerIcon",
+  props: {
+  item :Object,
+  isVisible:Boolean,
+  selectedLabel:String
+  }
 };
 </script>
 
 <style>
-@import "../../css/variable.css";
-.sidebar .sidebaricon {
+@import "../../assets/css/variable.css";
+.chat-drawer .chatdrawer-icon {
   padding: 8px;
   border-radius: 3px;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-.sidebar .sidebaricon > img {
+.chat-drawer .chatdrawer-icon > img {
   width: var(--hds-chatbox-header-logo-width);
   height: var(--hds-chatbox-header-logo-height);
 }

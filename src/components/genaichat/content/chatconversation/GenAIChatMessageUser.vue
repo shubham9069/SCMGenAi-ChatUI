@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-ai wrapper-user">
     <div class="chat-ai">
-      <SCMChatHeader
+      <GenAIChatMessageHeader
         :userDetails="userDetails"
         type="User"
         :collapseChat="collapseChat"
@@ -9,21 +9,21 @@
       />
 
       <div v-if="collapseChat">
-        <SCMChatContainer :message="message" />
+        <GenAIChatMessageContainer :message="message" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SCMChatHeader from "../chatconversation/SCMChatHeader.vue";
-import SCMChatContainer from "../chatconversation/SCMChatContainer.vue";
+import GenAIChatMessageHeader from "./GenAIChatMessageHeader.vue";
+import GenAIChatMessageContainer from "./GenAIChatMessageContainer.vue";
 
 export default {
-  name: "WrapperUser",
+  name: "GenAIChatMessageUser",
   components: {
-    SCMChatHeader,
-    SCMChatContainer,
+    GenAIChatMessageHeader,
+    GenAIChatMessageContainer,
   },
   data() {
     return {
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style>
-@import "../../../css/variable.css";
+@import "../../../../assets/css/variable.css";
 
 .wrapper-user .chat-ai {
   background: var(--hds-chatbox-container-chat-background);

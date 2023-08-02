@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "SCMPromptSuggestion",
+  name: "GenAIPromptSuggestion",
   props: {
     title: String,
   },
@@ -14,9 +14,9 @@ export default {
 </script>
 
 <style>
-@import "../../../css/variable.css";
+@import "../../../../assets/css/variable.css";
 
-.chat_container .suggestion-box > .chat-box-Suggestion-div {
+.chat-container .suggestion-box > .chat-box-Suggestion-div {
   margin: 0;
 }
 

@@ -36,10 +36,11 @@
 <script>
 /* eslint-disable vue/no-unused-components */
 export default {
-  name: "SCMChatUiInputBar",
+  name: "GenAIChatUInputBar",
   emits: ["message"],
-  components: {},
-  props: ["inputBoxPlaceholder"],
+  props: {
+    inputBoxPlaceholder:String
+  },
   data() {
     return {
       messageFile: {},
@@ -56,7 +57,7 @@ export default {
 </script>
 
 <style>
-@import "../../../css/variable.css";
+@import "../../../../assets/css/variable.css";
 .chat-form {
   width: var(--hds-chatbox-form-width);
   height: var(--hds-chatbox-form-height);

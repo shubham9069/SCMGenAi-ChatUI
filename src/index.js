@@ -1,3 +1,3 @@
-import SCMChatApp from "./App.vue";
+import SCMGenAIChatApp from "./App.vue";
 
-export { SCMChatApp };
+export { SCMGenAIChatApp };

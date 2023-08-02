@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-ai">
     <div class="chat-ai">
-      <SCMChatHeader
+      <GenAIChatMessageHeader
         :userDetails="{ name: 'Ai Logo', image: chatBoxStyle?.logo }"
         type="Ai"
         :collapseChat="collapseChat"
@@ -9,7 +9,7 @@
       />
 
       <div v-if="collapseChat">
-        <SCMChatContainer
+        <GenAIChatMessageContainer
           :message="message"
           v-if="!message?.isChatActionArea"
         />
@@ -18,7 +18,7 @@
           <p>{{ message?.areaActionButtonOption?.title }}</p>
           <div class="center-div">
             <!-- for cutsom color you have to use inline css Button component  -->
-            <SCMTagbutton
+            <GenAIChatTagbutton
               style="background: #e6f7ff; color: #005ac2; border-radius: 27px"
               :buttonDetails="{
                 Icon: message?.areaActionButtonOption?.secondaryButtonIcon,
@@ -26,7 +26,7 @@
               }"
             />
 
-            <SCMTagbutton
+            <GenAIChatTagbutton
               v-if="!this.PinToggle"
               @click="PinToggle = true"
               style="background: #0074e8; border-radius: 27px; color: white"
@@ -35,7 +35,7 @@
                 Text: message?.areaActionButtonOption?.primaryButtonText,
               }"
             />
-            <SCMTagbutton
+            <GenAIChatTagbutton
               v-else
               @click="PinToggle = false"
               style="
@@ -51,11 +51,11 @@
           </div>
         </div>
       </div>
-      <SCMChatFooter />
+      <GenAIChatMessageFooter />
     </div>
     <div class="suggestion-box">
       <!-- suggestion component -->
-      <SCMPromptSuggestion
+      <GenAIPromptSuggestion
         @click="$emit('isChatActionArea', message?.id)"
         v-bind="{ title: 'Make This Widget' }"
       />
@@ -65,21 +65,21 @@
 
 <script>
 import { markRaw } from "vue";
-import SCMChatHeader from "../chatconversation/SCMChatHeader.vue";
-import SCMChatFooter from "../chatconversation/SCMChatFooter.vue";
-import SCMChatContainer from "../chatconversation/SCMChatContainer.vue";
-import SCMTagbutton from "src/components/common/SCMTagbutton.vue";
-import SCMPromptSuggestion from "../common/SCMPromptSuggestion.vue";
+import GenAIChatMessageHeader from "./GenAIChatMessageHeader.vue";
+import GenAIChatMessageFooter from "./GenAIChatMessageFooter.vue";
+import GenAIChatMessageContainer from "./GenAIChatMessageContainer.vue";
+import GenAIChatTagbutton from "../common/GenAIChatTagbutton.vue";
+import GenAIPromptSuggestion from "../common/GenAIPromptSuggestion.vue";
 
 export default {
-  name: "WrapperAi",
+  name: "GenAIChatMessageUser",
   emits: ["isChatActionArea", "TogglePin"],
   components: {
-    SCMChatHeader,
-    SCMChatFooter,
-    SCMChatContainer,
-    SCMTagbutton,
-    SCMPromptSuggestion,
+    GenAIChatMessageHeader,
+    GenAIChatMessageFooter,
+    GenAIChatMessageContainer,
+    GenAIChatTagbutton,
+    GenAIPromptSuggestion,
   },
   props: {
     chatBoxStyle: Object,
@@ -100,7 +100,7 @@ export default {
 </script>
 
 <style>
-@import "../../../css/variable.css";
+@import "../../../../assets/css/variable.css";
 .wrapper-ai {
   width: var(--hds-chatbox-warpper-input-width);
   display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="chat-drawer">
     <!-- left sidebox  -->
     <section
       class="sidebox"
@@ -21,38 +21,37 @@
     <div class="toolbar">
       <template v-for="section in toolkitItems" :key="section.section">
         <template v-if="section.section == 'Section 1'">
-          <SCMToolBarIcons
+          <GenAIChatDrawerIcon
             v-for="item in section.items"
             :key="item.label"
             :item="item"
             @click="ActiveComponent(item.label, item.Component, item.Props)"
             :isVisible="isVisible"
             :selectedLabel="selectedLabel"
-          >
-          </SCMToolBarIcons>
+          />
+
           <div class="line" />
         </template>
 
         <template v-if="section.section == 'Section 2'">
-          <SCMToolBarIcons
+          <GenAIChatDrawerIcon
             v-for="item in section.items"
             :key="item.label"
             :item="item"
             :isVisible="isVisible"
             :selectedLabel="selectedLabel"
-          >
-          </SCMToolBarIcons>
+          />
+
           <div class="line" />
         </template>
         <template v-if="section.section == 'Section 3'">
-          <SCMToolBarIcons
+          <GenAIChatDrawerIcon
             v-for="item in section.items"
             :key="item.label"
             :item="item"
             :isVisible="isVisible"
             :selectedLabel="selectedLabel"
-          >
-          </SCMToolBarIcons>
+          />
         </template>
       </template>
     </div>
@@ -61,19 +60,19 @@
 
 <script>
 import { markRaw } from "vue";
-import SCMChat from "../scmchat/SCMChatEntry.vue";
-import SCMRecent from "../scmrecent/SCMRecentEntry.vue";
-import SCMToolBarIcons from "./SCMToolBarIcons.vue";
+import GenAIChatPage from "./GenAIChatPage.vue";
+import GenAIChatRecent from "./recent/GenAIChatRecent.vue";
+import GenAIChatDrawerIcon from "./GenAIChatDrawerIcon.vue";
 
 // this comment used for to handle not usedcomponent importing warn
 /* eslint-disable vue/no-unused-components */
 export default {
-  name: "SCMToolbarEntry",
-  emits: ["closeSidebar", "splitter"],
+  name: "GenAIChatDrawer",
+  emits: ["closechat-drawer", "splitter"],
   components: {
-    SCMToolBarIcons,
-    SCMChat,
-    SCMRecent,
+    GenAIChatDrawerIcon,
+    GenAIChatPage,
+    GenAIChatRecent,
   },
   data() {
     return {
@@ -89,7 +88,7 @@ export default {
               icon: "./assets/icons/ai-gradient.svg",
               selectedIcon: "./assets/icons/AI.svg",
               padding: 8,
-              Component: markRaw(SCMChat),
+              Component: markRaw(GenAIChatPage),
               Props: {
                 chatBoxStyle: {
                   logo: "./assets/icons/ai-gradient.svg",
@@ -135,7 +134,7 @@ export default {
               icon: "./assets/icons/history.svg",
               selectedIcon: "./assets/icons/white-history.svg",
               padding: 10,
-              Component: markRaw(SCMRecent),
+              Component: markRaw(GenAIChatRecent),
               Props: {
                 chatBoxHeader: {
                   title: "Recent",
@@ -209,9 +208,9 @@ export default {
 </script>
 
 <style>
-@import "../../css/variable.css";
+@import "../../assets/css/variable.css";
 
-.sidebar {
+.chat-drawer {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   /* background: grey; */
@@ -222,7 +221,7 @@ export default {
   justify-content: flex-end;
 }
 
-.sidebar .line {
+.chat-drawer .line {
   height: 1px;
   width: 100%;
   background: #e7ecf1;

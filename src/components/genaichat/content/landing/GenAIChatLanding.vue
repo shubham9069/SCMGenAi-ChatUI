@@ -1,13 +1,13 @@
 <template>
-  <div class="chat-box">
-    <div class="chatbox-header">
+  <div class="chat-landing">
+    <div class="chat-landing-header">
       <img :src="chatBoxStyle.logo" />
       <p>{{ emptyChatContent?.title }}</p>
     </div>
 
-    <div className="chat-box-input">
+    <div className="chat-landing-input">
       <input
-        id="search_Box"
+        id="search-Box"
         type="text"
         :placeholder="emptyChatContent?.inputPlaceholder"
         @keyup.enter="
@@ -22,14 +22,14 @@
       </div>
     </div>
 
-    <SCMLandingDataSkill :popularDataSkill="popularDataSkill" />
+    <GenAIChatLandingActionButtons :popularDataSkill="popularDataSkill" />
 
-    <div className="chat-box-Suggestion">
+    <div className="chat-landing-Suggestion">
       <span
         ><img :src="savedTemplates?.icon" /> {{ savedTemplates?.title }}</span
       >
       <!-- suggestion component  -->
-      <SCMPromptSuggestion
+      <GenAIPromptSuggestion
         v-for="data in savedTemplates.templates"
         :key="data?.title"
         @click="$emit('sentmessage', data?.title)"
@@ -40,15 +40,15 @@
 </template>
 
 <script>
-import SCMPromptSuggestion from "../common/SCMPromptSuggestion.vue";
-import SCMLandingDataSkill from "./SCMLandingDataSkill.vue";
+import GenAIPromptSuggestion from "../common/GenAIPromptSuggestion.vue";
+import GenAIChatLandingActionButtons from "./GenAIChatLandingActionButtons.vue";
 
 export default {
-  name: "SCMChatLanding",
+  name: "GenAIChatLanding",
   emits: ["sentmessage"],
   components: {
-    SCMLandingDataSkill,
-    SCMPromptSuggestion,
+    GenAIChatLandingActionButtons,
+    GenAIPromptSuggestion,
   },
   props: {
     chatBoxStyle: Object,
@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     SentmessageByButton() {
-      var element = document?.getElementById("search_Box");
+      var element = document?.getElementById("search-Box");
       this.$emit("sentmessage", element.value);
     },
   },
@@ -93,30 +93,30 @@ export default {
 </script>
 
 <style>
-@import "../../../css/variable.css";
+@import "../../../../assets/css/variable.css";
 
-.chatbox-header {
+.chat-landing-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   grid-gap: var(--hds-chatbox-header-gap);
   padding: var(--hds-chatbox-header-paddingY);
 }
-.chatbox-header > img {
+.chat-landing-header > img {
   width: var(--hds-chatbox-header-logo-width);
   height: var(--hds-chatbox-header-logo-height);
 }
-.chatbox-header > p {
+.chat-landing-header > p {
   margin: 0;
   font-size: var(--hds-chatbox-header-text);
   font-weight: var(--hds-chatbox-header-text-weight);
 }
 
-.chat-box-input {
+.chat-landing-input {
   display: flex;
   padding: var(--hds-chatbox-header-paddingY);
 }
-.chat-box-input input {
+.chat-landing-input input {
   width: var(--hds-chatbox-input-width);
   height: var(--hds-chatbox-input-height);
   border: var(--hds-chatbox-input-border);
@@ -125,7 +125,7 @@ export default {
   padding: var(--hds-chatbox-input-padding);
   outline: none;
 }
-.chat-box-input > div {
+.chat-landing-input > div {
   border-radius: var(--hds-chatbox-input-search-border-radius);
   background: var(--hds-chatbox-input-search-background);
   padding: var(--hds-chatbox-input-search-padding);
@@ -135,13 +135,13 @@ export default {
   align-items: center;
   cursor: pointer;
 }
-.chat_container .suggestion-box {
+.chat-container .suggestion-box {
   display: flex;
   grid-gap: var(--hds-chatbox-gap);
   width: 100%;
   flex-wrap: wrap;
 }
-.chat-box-Suggestion > span {
+.chat-landing-Suggestion > span {
   display: flex;
   align-items: center;
   font-weight: var(--hds-chatbox-saved-template-head-font-weight);

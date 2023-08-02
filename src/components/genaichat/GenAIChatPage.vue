@@ -1,18 +1,18 @@
 <template>
-  <SCMTopBar
+  <GenAIChatHeader
     @close="$emit('close')"
     @Chatui="this.chatMessages = []"
     :chatBoxHeader="chatBoxHeader"
   />
 
-  <SCMChatLanding
+  <GenAIChatLanding
     v-if="!chatMessages?.length"
     :chatBoxStyle="chatBoxStyle"
     :emptyChatContent="emptyChatContent"
     :savedTemplates="savedTemplates"
     @sentmessage="(value) => sentMessage(value)"
   />
-  <SCMChatUi
+  <GenAIChatUI
     v-else
     :chatMessages="chatMessages"
     :chatBoxStyle="chatBoxStyle"
@@ -23,17 +23,17 @@
 </template>
 
 <script>
-import SCMTopBar from "../common/SCMTopBar.vue";
-import SCMChatLanding from "./landing/SCMChatLanding.vue";
-import SCMChatUi from "./chatui/SCMChatUi.vue";
+import GenAIChatHeader from "./header/GenAIChatHeader.vue";
+import GenAIChatLanding from "./content/landing/GenAIChatLanding.vue";
+import GenAIChatUI from "./GenAIChatUI.vue";
 
 export default {
-  name: "SCMEntry",
+  name: "GenAIChatPage",
   emits: ["close"],
   components: {
-    SCMTopBar,
-    SCMChatLanding,
-    SCMChatUi,
+    GenAIChatHeader,
+    GenAIChatLanding,
+    GenAIChatUI,
   },
   props: {
     chatBoxStyle: Object,
@@ -76,7 +76,7 @@ export default {
       });
 
       // scroll to bottom function
-      //  when new msg are added into the chatMEssage Array so it will take few millisecound to update Dom so according to updated dom they will now look updated height of chat_container then scroll bottom
+      //  when new msg are added into the chatMEssage Array so it will take few millisecound to update Dom so according to updated dom they will now look updated height of chat-container then scroll bottom
 
       setTimeout(function () {
         const chatContainer = document.getElementById("chatcontainer");
@@ -100,7 +100,7 @@ export default {
 </script>
 
 <style>
-.chat-box {
+.chat-landing {
   padding: calc(2 * var(--hds-chatbox-padding));
   background: var(--hds-chatbox-background);
 
@@ -111,11 +111,11 @@ export default {
   border: var(--hds-sidebar-border);
   overflow-y: scroll;
 }
-.chat-box::-webkit-scrollbar {
+.chat-landing::-webkit-scrollbar {
   width: 4px;
 }
 
-.chat-box::-webkit-scrollbar-thumb {
+.chat-landing::-webkit-scrollbar-thumb {
   background: #b2b2b2c1;
   border-radius: 80px;
 }

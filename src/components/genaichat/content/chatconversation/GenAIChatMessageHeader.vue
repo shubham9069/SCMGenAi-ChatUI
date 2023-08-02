@@ -30,7 +30,7 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="menu_dots_horizontal">
+        <g id="menu-dots-horizontal">
           <path
             id="Union"
             fill-rule="evenodd"
@@ -42,7 +42,7 @@
       </svg>
 
       <!-- // dropdown component -->
-      <SCMDropDown
+      <GenAIChatDropDown
         :DropDown_Toggle="DropDown_Toggle"
         :List="['OperationX', 'OperationY']"
       />
@@ -53,13 +53,13 @@
 
 <script>
 import { markRaw } from "vue";
-import SCMDropDown from "src/components/common/SCMDropDown.vue";
+import GenAIChatDropDown from "../common/GenAIChatDropDown.vue";
 
 export default {
-  name: "SCMChatHeader",
+  name: "GenAIChatMessageHeader",
   emits: ["Collapse"],
   components: {
-    SCMDropDown,
+    GenAIChatDropDown,
   },
   data() {
     return {
@@ -131,6 +131,4 @@ export default {
   cursor: pointer;
   display: flex;
 }
-
-
 </style>

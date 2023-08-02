@@ -1,5 +1,5 @@
 <template>
-  <div class="top" v-show="chatBoxHeader?.showChatBoxHeader">
+  <div class="header" v-show="chatBoxHeader?.showChatBoxHeader">
     <svg
       @click="$emit('close')"
       width="24"
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: "TopBar",
+  name: "GenAiChatHeader",
   emits: ["close", "Chatui"],
   props: {
     chatBoxHeader: Object,
@@ -49,8 +49,8 @@ export default {
 </script>
 
 <style>
-@import url("../../css/variable.css");
-.top {
+@import url("../../../assets/css/variable.css");
+.header {
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -58,10 +58,10 @@ export default {
   grid-gap: 20px;
   border: var(--hds-sidebar-border);
 }
-.top svg {
+.header svg {
   cursor: pointer;
 }
-.top p {
+.header p {
   font-size: 18px;
   margin: 0;
   cursor: pointer;
