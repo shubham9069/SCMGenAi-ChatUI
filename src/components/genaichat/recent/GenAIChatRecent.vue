@@ -1,6 +1,6 @@
 <template>
   <GenAIChatHeader @close="$emit('close')" :chatBoxHeader="chatBoxHeader" />
-  <div class="chat-box">
+  <div class="chat-landing">
     <h5>{{ Content }}</h5>
   </div>
 </template>
