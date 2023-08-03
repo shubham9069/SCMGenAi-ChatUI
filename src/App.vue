@@ -12,7 +12,7 @@
           {{ n }}. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
           Quis praesentium cumque magnam odio iure quidem, quod illum numquam
           possimus obcaecati commodi minima assumenda consectetur culpa fuga
-          nulla ullam. In, libero.
+          nulla ullam. In, libero.{{ $store.state.storedata.selectedLabel }}
         </div>
       </div>
     </template>
@@ -30,7 +30,7 @@ import { SCMGenAIChatApp, storedata } from "scm-ui";
 
 import { ref } from "vue";
 import { markRaw } from "vue";
-
+import { useStore } from "vuex";
 /* eslint-disable vue/no-unused-components */
 
 export default {
@@ -40,7 +40,7 @@ export default {
   },
   setup() {
     return {
-      splitterModel: ref(30), // start at 50%
+      splitterModel: ref(30),
     };
   },
   data() {
