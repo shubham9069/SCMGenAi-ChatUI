@@ -2,36 +2,16 @@
   <div class="linegrey" />
   <div class="chat-Footer">
     <!-- collapse menu -->
-    <img
-      :style="{
-        cursor: 'pointer',
-      }"
-      src="assets/icons/FooterIcon1.png"
-    />
-    <img
-      :style="{
-        cursor: 'pointer',
-      }"
-      src="assets/icons/Footer2.png"
-    />
-    <img
-      :style="{
-        cursor: 'pointer',
-      }"
-      src="assets/icons/Footer3.png"
-    />
-    <img
-      :style="{
-        cursor: 'pointer',
-      }"
-      src="assets/icons/Footer4.png"
-    />
+    <img v-for="image in iconArr" :key="image.name" :src="image.src" />
   </div>
 </template>
 
 <script>
 export default {
   name: "GenAIChatMessageFooter",
+  props: {
+    iconArr: Array,
+  },
 };
 </script>
 
@@ -39,11 +19,12 @@ export default {
 .chat-Footer {
   display: flex;
   align-items: center;
-  padding-top: 8px;
+  padding: 8px 0;
   grid-gap: 20px;
 }
 .chat-Footer > img {
   width: 17px;
   height: 17px;
+  cursor: pointer;
 }
 </style>

@@ -9,7 +9,7 @@
     <div class="ai-profile-head">
       <div class="profile-info">
         <span class="user-name">{{ userDetails?.name }}</span>
-        <span class="chat-date">16 May, 2:44 PM</span>
+        <span class="chat-date">{{ moment(message?.date).format("LL") }}</span>
       </div>
     </div>
     <!-- collapse menu -->
@@ -19,11 +19,11 @@
         transform: `${collapseChat ? 'rotate(0)' : 'rotate(180deg)'}`,
       }"
       src="assets/icons/downArrow.png"
-      @click="$emit('Collapse')"
+      @click="$emit('collapseMessageContainer')"
     />
     <div class="three-dot">
       <svg
-        @click="this.DropDown_Toggle = !this.DropDown_Toggle"
+        @click="this.dropDownToggle = !this.dropDownToggle"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -43,8 +43,8 @@
 
       <!-- // dropdown component -->
       <GenAIChatDropDown
-        :DropDown_Toggle="DropDown_Toggle"
-        :List="['OperationX', 'OperationY']"
+        :dropDownToggle="dropDownToggle"
+        :dropDownList="['OperationX', 'OperationY']"
       />
     </div>
   </div>
@@ -54,22 +54,29 @@
 <script>
 import { markRaw } from "vue";
 import GenAIChatDropDown from "../common/GenAIChatDropDown.vue";
+import moment from "moment";
 
 export default {
   name: "GenAIChatMessageHeader",
-  emits: ["Collapse"],
+  emits: ["collapseMessageContainer"],
   components: {
     GenAIChatDropDown,
-  },
-  data() {
-    return {
-      DropDown_Toggle: false,
-    };
   },
   props: {
     userDetails: Object,
     type: String,
     collapseChat: Boolean,
+    message: Object,
+  },
+  data() {
+    return {
+      dropDownToggle: false,
+    };
+  },
+  methods: {
+    moment: function () {
+      return moment();
+    },
   },
 };
 </script>

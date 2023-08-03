@@ -4,9 +4,7 @@
   </div>
   <div class="message" v-else>
     <div class="loader">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
+      <div class="dot" v-for="dot in [...Array(3)]" :key="dot"></div>
     </div>
   </div>
 </template>

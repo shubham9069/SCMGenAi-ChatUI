@@ -1,5 +1,5 @@
 <template>
-  <span class="tag-button"
+  <span class="tag-button" :style="buttonProps"
     ><img :src="buttonDetails.Icon" />
     {{ buttonDetails.Text }}
   </span>
@@ -10,6 +10,7 @@ export default {
   name: "GenAIChatTagbutton",
   props: {
     buttonDetails: Object,
+    buttonProps: Object,
   },
 };
 </script>
@@ -26,6 +27,7 @@ export default {
   width: max-content;
   text-transform: capitalize;
   cursor: pointer;
+  border-radius: 27px;
 }
 
 .tag-button img {

@@ -4,7 +4,7 @@
     <section
       class="sidebox"
       :style="{
-        display: `${store.state.storedata.isVisible ? 'Block' : 'none'}`,
+        display: `${$store.state.storedata.isVisible ? 'Block' : 'none'}`,
       }"
     >
       <div class="bottom">
@@ -12,7 +12,6 @@
           <component
             :is="Component"
             v-bind="Props"
-            @close="isVisible = false"
             :userDetails="userDetails"
           />
         </keep-alive>
@@ -22,7 +21,7 @@
     <!-- right toolkox bar  -->
     <div class="toolbar">
       <template
-        v-for="section in store.state.storedata.toolkitItems"
+        v-for="section in $store.state.storedata.toolkitItems"
         :key="section.section"
       >
         <template v-if="section.section == 'Section 1'">
@@ -30,7 +29,7 @@
             v-for="item in section.items"
             :key="item.label"
             :item="item"
-            @click="ActiveComponent(item.label, item.Component, item.Props)"
+            @click="activeComponent(item.label, item.Component, item.Props)"
           />
 
           <div class="line" />
@@ -59,18 +58,12 @@
 
 <script>
 import GenAIChatDrawerIcon from "./GenAIChatDrawerIcon.vue";
-import { useStore } from "vuex";
 
 // this comment used for to handle not usedcomponent importing warn
 /* eslint-disable vue/no-unused-components */
 export default {
-  setup() {
-    const store = useStore();
-
-    return { store };
-  },
   name: "GenAIChatDrawer",
-  emits: ["closechat-drawer", "splitter"],
+  emits: ["splitter"],
   components: {
     GenAIChatDrawerIcon,
   },
@@ -84,10 +77,10 @@ export default {
     userDetails: Object,
   },
   methods: {
-    ActiveComponent(label, component, props) {
-      this.Component = component;
-      this.Props = props;
-      this.store.commit("storedata/SelectedLabelFunc", label);
+    activeComponent(itemLabel, itemComponent, itemProps) {
+      this.Component = itemComponent;
+      this.Props = itemProps;
+      this.$store.commit("storedata/SelectedLabelFunc", itemLabel);
 
       // this.$emit("splitter", this.isVisible);
     },

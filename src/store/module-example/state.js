@@ -49,9 +49,6 @@ export default function () {
                   },
                 ],
               },
-              QuasarTagButton: {
-                color: "primary",
-              },
             },
           },
           {
@@ -112,5 +109,6 @@ export default function () {
     ],
     selectedLabel: "",
     isVisible: false,
+    chatMessages: [],
   };
 }

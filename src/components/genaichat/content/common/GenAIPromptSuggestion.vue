@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-box-Suggestion-div">
+  <div class="chat-box-suggestion-div">
     {{ title }}
   </div>
 </template>
@@ -16,11 +16,11 @@ export default {
 <style>
 @import "../../../../assets/css/variable.css";
 
-.chat-container .suggestion-box > .chat-box-Suggestion-div {
+.chat-container .suggestion-box > .chat-box-suggestion-div {
   margin: 0;
 }
 
-.chat-box-Suggestion-div {
+.chat-box-suggestion-div {
   display: flex;
   align-items: center;
   grid-gap: var(--hds-chatbox-saved-template-head-gap);

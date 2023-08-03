@@ -4,8 +4,9 @@
       <GenAIChatMessageHeader
         :userDetails="{ name: 'Ai Logo', image: chatBoxStyle?.logo }"
         type="Ai"
+        :message="message"
         :collapseChat="collapseChat"
-        @Collapse="this.collapseChat = !this.collapseChat"
+        @collapseMessageContainer="this.collapseChat = !this.collapseChat"
       />
 
       <div v-if="collapseChat">
@@ -14,12 +15,15 @@
           v-if="!message?.isChatActionArea"
         />
 
-        <div class="chatAction" v-if="message?.isChatActionArea">
+        <div class="chat-action" v-else>
           <p>{{ message?.areaActionButtonOption?.title }}</p>
           <div class="center-div">
             <!-- for cutsom color you have to use inline css Button component  -->
             <GenAIChatTagbutton
-              style="background: #e6f7ff; color: #005ac2; border-radius: 27px"
+              :buttonProps="{
+                background: '#e6f7ff',
+                color: '#005ac2',
+              }"
               :buttonDetails="{
                 Icon: message?.areaActionButtonOption?.secondaryButtonIcon,
                 Text: message?.areaActionButtonOption?.secondaryButtonText,
@@ -27,9 +31,12 @@
             />
 
             <GenAIChatTagbutton
-              v-if="!this.PinToggle"
-              @click="PinToggle = true"
-              style="background: #0074e8; border-radius: 27px; color: white"
+              v-if="!this.pinToggle"
+              @click="pinToggle = true"
+              :buttonProps="{
+                background: '#0074e8',
+                color: 'white',
+              }"
               :buttonDetails="{
                 Icon: message?.areaActionButtonOption?.primaryButtonIcon,
                 Text: message?.areaActionButtonOption?.primaryButtonText,
@@ -37,12 +44,11 @@
             />
             <GenAIChatTagbutton
               v-else
-              @click="PinToggle = false"
-              style="
-                background: #d0d7de;
-                text-color: #25282e;
-                border-radius: 27px;
-              "
+              @click="pinToggle = false"
+              :buttonProps="{
+                background: '#d0d7de',
+                'text-color': '#25282e',
+              }"
               :buttonDetails="{
                 Icon: './assets/icons/pin.svg',
                 Text: 'Unpin',
@@ -51,12 +57,14 @@
           </div>
         </div>
       </div>
-      <GenAIChatMessageFooter />
+      <GenAIChatMessageFooter :iconArr="iconArr" />
     </div>
     <div class="suggestion-box">
       <!-- suggestion component -->
       <GenAIPromptSuggestion
-        @click="$emit('isChatActionArea', message?.id)"
+        @click="
+          this.$store.commit('storedata/chatActionAreaToggle', message?.id)
+        "
         v-bind="{ title: 'Make This Widget' }"
       />
     </div>
@@ -64,7 +72,6 @@
 </template>
 
 <script>
-import { markRaw } from "vue";
 import GenAIChatMessageHeader from "./GenAIChatMessageHeader.vue";
 import GenAIChatMessageFooter from "./GenAIChatMessageFooter.vue";
 import GenAIChatMessageContainer from "./GenAIChatMessageContainer.vue";
@@ -73,7 +80,6 @@ import GenAIPromptSuggestion from "../common/GenAIPromptSuggestion.vue";
 
 export default {
   name: "GenAIChatMessageUser",
-  emits: ["isChatActionArea", "TogglePin"],
   components: {
     GenAIChatMessageHeader,
     GenAIChatMessageFooter,
@@ -87,15 +93,33 @@ export default {
   },
   data() {
     return {
-      PinToggle: false,
+      pinToggle: false,
       collapseChat: true,
+      iconArr: [
+        {
+          name: "FooterIcon1",
+          src: "assets/icons/FooterIcon1.png",
+          action: "",
+        },
+        {
+          name: "FooterIcon2",
+          src: "assets/icons/FooterIcon2.png",
+          action: "",
+        },
+        {
+          name: "FooterIcon3",
+          src: "assets/icons/FooterIcon3.png",
+          action: "",
+        },
+        {
+          name: "FooterIcon4",
+          src: "assets/icons/FooterIcon4.png",
+          action: "",
+        },
+      ],
     };
   },
-  methods: {
-    toggle() {
-      console.log("dfghj");
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -121,7 +145,7 @@ export default {
   position: relative;
 }
 
-.wrapper-ai .message.bot-message {
+.wrapper-ai .message .bot-message {
   float: left;
 }
 .wrapper-ai .chat-profile-info {
@@ -131,19 +155,19 @@ export default {
   padding-bottom: 8px;
 }
 
-.chatAction {
+.chat-action {
   padding: 12px 16px;
   margin: 1rem 0;
   border: var(--hds-sidebar-border);
   border-radius: 8px;
 }
-.chatAction > p {
+.chat-action > p {
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 20px;
 }
-.chatAction > .center-div {
+.chat-action > .center-div {
   display: flex;
   justify-content: space-between;
   align-content: center;

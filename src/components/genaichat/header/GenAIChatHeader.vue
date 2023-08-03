@@ -1,7 +1,7 @@
 <template>
   <div class="header" v-show="chatBoxHeader?.showChatBoxHeader">
     <svg
-      @click="$emit('close')"
+      @click="this.$store.commit('storedata/closeSideBar')"
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -16,7 +16,10 @@
         />
       </g>
     </svg>
-    <p style="flex: 1" @click="$emit('Chatui')">
+    <p
+      style="flex: 1"
+      @click="this.$store.commit('storedata/gotoLandingPage', inputText)"
+    >
       {{ chatBoxHeader?.title }}
     </p>
 
@@ -41,7 +44,6 @@
 <script>
 export default {
   name: "GenAiChatHeader",
-  emits: ["close", "Chatui"],
   props: {
     chatBoxHeader: Object,
   },

@@ -15,7 +15,9 @@ import storedata from "./module-example/index";
 
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
-    modules: {},
+    modules: {
+      storedata,
+    },
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only

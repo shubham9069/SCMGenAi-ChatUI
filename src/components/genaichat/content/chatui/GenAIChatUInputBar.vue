@@ -4,7 +4,7 @@
       <div class="chat-icon" @click="selectMedia">
         <input
           type="file"
-          id="MessageFile"
+          id="messageFile"
           hidden
           @change="($event) => (this.messageFile = $event.target.files)"
         />
@@ -13,11 +13,12 @@
       <input
         type="text"
         name="query"
+        id="messageBox"
         :placeholder="inputBoxPlaceholder"
         class="chat-textbox"
         @keyup.enter="
           ($event) => {
-            $emit('message', $event.target.value);
+            $emit('inputValueChatUi', $event.target.value);
             $event.target.value = '';
           }
         "
@@ -26,7 +27,7 @@
       <div class="chat-icon2">
         <img src="assets/icons/mic.png" alt="" />
       </div>
-      <div class="chat-icon2">
+      <div class="chat-icon2" @click="send">
         <img src="assets/icons/send.png" alt="" />
       </div>
     </div>
@@ -37,9 +38,9 @@
 /* eslint-disable vue/no-unused-components */
 export default {
   name: "GenAIChatUInputBar",
-  emits: ["message"],
+  emits: ["inputValueChatUi"],
   props: {
-    inputBoxPlaceholder:String
+    inputBoxPlaceholder: String,
   },
   data() {
     return {
@@ -48,9 +49,12 @@ export default {
   },
   methods: {
     selectMedia() {
-      console.log(this.messageFile);
-      var element = document.getElementById("MessageFile");
+      var element = document.getElementById("messageFile");
       element.click();
+    },
+    send() {
+      var element = document.getElementById("messageBox");
+      this.$store.commit("storedata/sentMessage", element.value);
     },
   },
 };
@@ -83,6 +87,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .chat-form .chat-input-group .chat-icon > img {

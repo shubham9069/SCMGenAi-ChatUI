@@ -14,9 +14,8 @@ export default {
     GenAIChatHeader,
   },
   props: {
-    chatBoxHeader: {
-      type: Object,
-    },
+    chatBoxHeader: Object,
+    userDetails: Object,
     Content: String,
   },
 };

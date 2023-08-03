@@ -12,12 +12,12 @@
         :placeholder="emptyChatContent?.inputPlaceholder"
         @keyup.enter="
           ($event) => {
-            $emit('sentmessage', $event.target.value);
+            this.$store.commit('storedata/sentMessage', $event.target.value);
             $event.target.value = '';
           }
         "
       />
-      <div @click="SentmessageByButton">
+      <div @click="sentMsgBySearchIcon">
         <img :src="emptyChatContent?.searchIcon" />
       </div>
     </div>
@@ -32,7 +32,7 @@
       <GenAIPromptSuggestion
         v-for="data in savedTemplates.templates"
         :key="data?.title"
-        @click="$emit('sentmessage', data?.title)"
+        @click="this.$store.commit('storedata/sentMessage', data.title)"
         v-bind="{ title: data?.title }"
       />
     </div>
@@ -45,7 +45,6 @@ import GenAIChatLandingActionButtons from "./GenAIChatLandingActionButtons.vue";
 
 export default {
   name: "GenAIChatLanding",
-  emits: ["sentmessage"],
   components: {
     GenAIChatLandingActionButtons,
     GenAIPromptSuggestion,
@@ -84,9 +83,9 @@ export default {
     };
   },
   methods: {
-    SentmessageByButton() {
+    sentMsgBySearchIcon() {
       var element = document?.getElementById("search-Box");
-      this.$emit("sentmessage", element.value);
+      this.$store.commit("storedata/sentMessage", element.value);
     },
   },
 };

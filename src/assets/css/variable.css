@@ -75,7 +75,7 @@
   --hds-chatbox-container-border-radius: 16px 16px 0px 16px;
   --hds-chatbox-container-message-color: #25282e;
   --hds-chatbox-container-message-font-size: 14px;
-  --hds-chatbox-container-message-padding: 8px 16px 8px 16px;
+  --hds-chatbox-container-message-padding: 8px 16px 0 16px;
   --hds-chatbox-chat-profile-padding: 12px 16px;
   --hds-chatbox-chat-profile-gap: 8px;
   --hds-chatbox-chat-profile-border-bottom: 1px solid #dee2e6;

@@ -1,13 +1,15 @@
 <template>
   <div class="chat-ui">
-    <div class="chat-container chat-landing" id="chatcontainer">
-      <template v-for="(message, index) in chatMessages" :key="index">
+    <div class="chat-container chat-landing" id="chatui-container">
+      <template
+        v-for="(message, index) in $store.state.storedata.chatMessages"
+        :key="index"
+      >
         <!-- wrapper Ai component  -->
         <GenAIChatMessageAI
           v-if="message?.isAI"
           :message="message"
           :chatBoxStyle="chatBoxStyle"
-          @isChatActionArea="(id) => this.$emit('isChatActionArea', id)"
         />
 
         <!-- wrapper User Component  -->
@@ -22,7 +24,9 @@
     <!-- inputBar Component  -->
     <GenAIChatUInputBar
       inputBoxPlaceholder="Ask your data question"
-      @message="(msg) => this.$emit('sentmessage', msg)"
+      @inputValueChatUi="
+        (inputText) => this.$store.commit('storedata/sentMessage', inputText)
+      "
     />
   </div>
 </template>
@@ -34,14 +38,12 @@ import GenAIChatUInputBar from "./content/chatui/GenAIChatUInputBar.vue";
 
 export default {
   name: "GenAIChatUI",
-  emits: ["isChatActionArea", "sentmessage"],
   components: {
     GenAIChatMessageAI,
     GenAIChatMessageUser,
     GenAIChatUInputBar,
   },
   props: {
-    chatMessages: Array,
     chatBoxStyle: Object,
     userDetails: Object,
   },

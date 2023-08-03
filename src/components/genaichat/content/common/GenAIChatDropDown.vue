@@ -1,9 +1,6 @@
 <template>
-  <ul
-    class="dropdown-menu chat-dropdown"
-    :style="{ display: `${DropDown_Toggle ? 'Block' : 'none'}` }"
-  >
-    <li v-for="element in List" :key="element">
+  <ul class="dropdown-menu chat-dropdown" :style="toggle">
+    <li v-for="element in dropDownList" :key="element">
       <p>{{ element }}</p>
     </li>
   </ul>
@@ -12,7 +9,12 @@
 <script>
 export default {
   name: "GenAIChatDropDown",
-  props: { DropDown_Toggle: Boolean, List: Array },
+  props: { dropDownToggle: Boolean, dropDownList: Array },
+  computed: {
+    toggle() {
+      return { display: this.dropDownToggle ? "Block" : "none" };
+    },
+  },
 };
 </script>
 

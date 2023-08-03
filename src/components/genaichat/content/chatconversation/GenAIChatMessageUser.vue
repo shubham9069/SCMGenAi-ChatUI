@@ -4,8 +4,9 @@
       <GenAIChatMessageHeader
         :userDetails="userDetails"
         type="User"
+        :message="message"
         :collapseChat="collapseChat"
-        @Collapse="this.collapseChat = !this.collapseChat"
+        @collapseMessageContainer="this.collapseChat = !this.collapseChat"
       />
 
       <div v-if="collapseChat">
