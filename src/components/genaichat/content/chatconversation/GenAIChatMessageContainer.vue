@@ -17,6 +17,7 @@ export default {
 </script>
 
 <style>
+@import "/src/assets/css/variable.css";
 .message {
   color: var(--hds-chatbox-warpper-message-color);
   font-style: normal;

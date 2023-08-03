@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style>
+@import "/src/assets/css/variable.css";
 .chat-Footer {
   display: flex;
   align-items: center;

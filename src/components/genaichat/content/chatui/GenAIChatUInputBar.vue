@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style>
-@import "../../../../assets/css/variable.css";
+@import "/src/assets/css/variable.css";
 .chat-form {
   width: var(--hds-chatbox-form-width);
   height: var(--hds-chatbox-form-height);

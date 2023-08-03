@@ -51,6 +51,7 @@ export default {
 </script>
 
 <style>
+@import "/src/assets/css/variable.css";
 .chat-ui {
   background: var(--hds-chatbox-background);
   border: var(--hds-sidebar-border);

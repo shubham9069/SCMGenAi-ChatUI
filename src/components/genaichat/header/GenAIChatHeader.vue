@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style>
-@import url("../../../assets/css/variable.css");
+@import "/src/assets/css/variable.css";
 .header {
   padding: 1rem;
   display: flex;

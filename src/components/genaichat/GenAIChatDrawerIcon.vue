@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style>
-@import "../../assets/css/variable.css";
+@import "/src/assets/css/variable.css";
 .chat-drawer .chatdrawer-icon {
   padding: 8px;
   border-radius: 3px;

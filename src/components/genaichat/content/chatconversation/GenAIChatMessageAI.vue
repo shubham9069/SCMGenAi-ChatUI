@@ -124,7 +124,7 @@ export default {
 </script>
 
 <style>
-@import "../../../../assets/css/variable.css";
+@import "/src/assets/css/variable.css";
 .wrapper-ai {
   width: var(--hds-chatbox-warpper-input-width);
   display: flex;

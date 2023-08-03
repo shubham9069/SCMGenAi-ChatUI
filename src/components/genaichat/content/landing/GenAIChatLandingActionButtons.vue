@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style>
-@import "../../../../assets/css/variable.css";
+@import "/src/assets/css/variable.css";
 
 .action-button-container {
   margin-bottom: 20px;

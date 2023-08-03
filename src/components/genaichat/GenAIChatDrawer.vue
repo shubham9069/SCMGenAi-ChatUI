@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style>
-@import "../../assets/css/variable.css";
+
 
 .chat-drawer {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
