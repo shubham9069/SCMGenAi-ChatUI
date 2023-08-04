@@ -4,42 +4,34 @@
       class="profile-icon"
       :style="{ padding: `${type == 'Ai' ? '5px' : '0px'}` }"
     >
-      <img :src="userDetails?.image" alt="" />
+      <span class="material-icons" v-if="type == 'Ai'"> auto_awesome </span>
+      <img :src="$store.state.demostore.userDetails?.image" alt="" v-else />
     </div>
     <div class="ai-profile-head">
       <div class="profile-info">
-        <span class="user-name">{{ userDetails?.name }}</span>
-        <span class="chat-date">{{ moment(message?.date).format("LL") }}</span>
+        <span class="user-name">{{
+          type == "Ai" ? "Ai Gen" : $store.state.demostore.userDetails?.name
+        }}</span>
+        <span class="chat-date">{{ moment(message?.date).fromNow() }}</span>
       </div>
     </div>
     <!-- collapse menu -->
-    <img
-      :style="{
-        cursor: 'pointer',
-        transform: `${collapseChat ? 'rotate(0)' : 'rotate(180deg)'}`,
-      }"
-      src="assets/icons/downArrow.png"
+    <span
+      class="material-icons iconSize"
+      :style="collapse"
       @click="$emit('collapseMessageContainer')"
-    />
+    >
+      keyboard_arrow_down
+    </span>
+
     <div class="three-dot">
-      <svg
+      <span
+        class="material-icons iconSize"
+        :style="{ color: 'grey' }"
         @click="this.dropDownToggle = !this.dropDownToggle"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="menu-dots-horizontal">
-          <path
-            id="Union"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M6.75 12C6.75 12.9665 5.9665 13.75 5 13.75C4.0335 13.75 3.25 12.9665 3.25 12C3.25 11.0335 4.0335 10.25 5 10.25C5.9665 10.25 6.75 11.0335 6.75 12ZM12 13.75C12.9665 13.75 13.75 12.9665 13.75 12C13.75 11.0335 12.9665 10.25 12 10.25C11.0335 10.25 10.25 11.0335 10.25 12C10.25 12.9665 11.0335 13.75 12 13.75ZM19 13.75C19.9665 13.75 20.75 12.9665 20.75 12C20.75 11.0335 19.9665 10.25 19 10.25C18.0335 10.25 17.25 11.0335 17.25 12C17.25 12.9665 18.0335 13.75 19 13.75Z"
-            fill="#656C78"
-          />
-        </g>
-      </svg>
+        more_horiz
+      </span>
 
       <!-- // dropdown component -->
       <GenAIChatDropDown
@@ -48,25 +40,36 @@
       />
     </div>
   </div>
-  <div class="linegrey" />
+  <q-separator />
 </template>
 
 <script>
-import { markRaw } from "vue";
-import GenAIChatDropDown from "../common/GenAIChatDropDown.vue";
+import GenAIChatDropDown from "src/components/genaichat/content/common/GenAIChatDropDown.vue";
 import moment from "moment";
+import { mapGetters } from "vuex";
 
 export default {
+  // computed: {
+  //   ...mapGetters("storedata", ["get_userDetails"]),
+  // },
   name: "GenAIChatMessageHeader",
   emits: ["collapseMessageContainer"],
   components: {
     GenAIChatDropDown,
   },
   props: {
-    userDetails: Object,
-    type: String,
-    collapseChat: Boolean,
-    message: Object,
+    type: {
+      type: String,
+      required: true,
+    },
+    collapseChat: {
+      type: Boolean,
+      required: true,
+    },
+    message: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -78,11 +81,19 @@ export default {
       return moment();
     },
   },
+  computed: {
+    collapse() {
+      return {
+        transform: `${this.collapseChat ? "rotate(0)" : "rotate(180deg)"}`,
+        color: "grey",
+      };
+    },
+  },
 };
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 .ai-profile-head {
   display: grid;
   grid-template-columns: var(
@@ -95,7 +106,7 @@ export default {
   display: flex;
   align-items: center;
   gap: var(--hds-chatbox-chat-profile-gap);
-  padding-bottom: 8px;
+  padding: 8px 16px;
 }
 .chat-profile-info .profile-icon {
   height: var(--hds-chatbox-chat-profile-height) !important;
@@ -127,13 +138,7 @@ export default {
   object-fit: cover;
   width: 100%;
 }
-.wrapper-ai > .chat-ai > .linegrey {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 0.5px;
-  background: #d0d7de;
-}
+
 .three-dot {
   position: relative;
   cursor: pointer;

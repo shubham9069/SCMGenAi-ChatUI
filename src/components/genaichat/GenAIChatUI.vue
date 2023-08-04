@@ -1,57 +1,41 @@
 <template>
   <div class="chat-ui">
     <div class="chat-container chat-landing" id="chatui-container">
-      <template
-        v-for="(message, index) in $store.state.storedata.chatMessages"
-        :key="index"
-      >
+      <template v-for="(message, index) in get_chatMessages" :key="index">
         <!-- wrapper Ai component  -->
-        <GenAIChatMessageAI
-          v-if="message?.isAI"
-          :message="message"
-          :chatBoxStyle="chatBoxStyle"
-        />
+        <GenAIChatMessageAI v-if="message?.isAI" :message="message" />
 
         <!-- wrapper User Component  -->
-        <GenAIChatMessageUser
-          v-else
-          :message="message"
-          :userDetails="userDetails"
-        />
+        <GenAIChatMessageUser v-else :message="message" />
       </template>
     </div>
 
     <!-- inputBar Component  -->
-    <GenAIChatUInputBar
-      inputBoxPlaceholder="Ask your data question"
-      @inputValueChatUi="
-        (inputText) => this.$store.commit('storedata/sentMessage', inputText)
-      "
-    />
+    <GenAIChatUInputBar inputBoxPlaceholder="Ask your data question" />
   </div>
 </template>
 
 <script>
-import GenAIChatMessageAI from "./content/chatconversation/GenAIChatMessageAI.vue";
-import GenAIChatMessageUser from "./content/chatconversation/GenAIChatMessageUser.vue";
-import GenAIChatUInputBar from "./content/chatui/GenAIChatUInputBar.vue";
+import GenAIChatMessageAI from "src/components/genaichat/content/chatconversation/GenAIChatMessageAI.vue";
+import GenAIChatMessageUser from "src/components/genaichat/content/chatconversation/GenAIChatMessageUser.vue";
+import GenAIChatUInputBar from "src/components/genaichat/content/chatui/GenAIChatUInputBar.vue";
+import { mapGetters } from "vuex";
 
 export default {
+  computed: {
+    ...mapGetters("storedata", ["get_chatMessages"]),
+  },
   name: "GenAIChatUI",
   components: {
     GenAIChatMessageAI,
     GenAIChatMessageUser,
     GenAIChatUInputBar,
   },
-  props: {
-    chatBoxStyle: Object,
-    userDetails: Object,
-  },
 };
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 .chat-ui {
   background: var(--hds-chatbox-background);
   border: var(--hds-sidebar-border);

@@ -1,14 +1,12 @@
 <template>
   <div class="chat-form">
     <div class="chat-input-group">
-      <div class="chat-icon" @click="selectMedia">
-        <input
-          type="file"
-          id="messageFile"
-          hidden
-          @change="($event) => (this.messageFile = $event.target.files)"
-        />
-        <img src="assets/icons/paperclip.png" alt="" />
+      <div class="chat-icon" @click="selectMedia" v-if="!messageFile">
+        <input type="file" id="messageFile" hidden @change="handleFile" />
+        <span class="mdi mdi-paperclip"></span>
+      </div>
+      <div class="chat-icon" @click="deselectMedia" v-else>
+        <span class="mdi mdi-progress-close"></span>
       </div>
       <input
         type="text"
@@ -16,19 +14,14 @@
         id="messageBox"
         :placeholder="inputBoxPlaceholder"
         class="chat-textbox"
-        @keyup.enter="
-          ($event) => {
-            $emit('inputValueChatUi', $event.target.value);
-            $event.target.value = '';
-          }
-        "
+        @keyup.enter="sentMsg"
         autocomplete="off"
       />
-      <div class="chat-icon2">
-        <img src="assets/icons/mic.png" alt="" />
+      <div class="chat-icon">
+        <span class="mdi mdi-microphone"></span>
       </div>
-      <div class="chat-icon2" @click="send">
-        <img src="assets/icons/send.png" alt="" />
+      <div class="chat-icon" @click="sentMsg">
+        <span class="mdi mdi-send-circle"></span>
       </div>
     </div>
   </div>
@@ -40,11 +33,15 @@ export default {
   name: "GenAIChatUInputBar",
   emits: ["inputValueChatUi"],
   props: {
-    inputBoxPlaceholder: String,
+    inputBoxPlaceholder: {
+      type: String,
+      required: false,
+      default: "Type Here ... ",
+    },
   },
   data() {
     return {
-      messageFile: {},
+      messageFile: "",
     };
   },
   methods: {
@@ -52,16 +49,24 @@ export default {
       var element = document.getElementById("messageFile");
       element.click();
     },
-    send() {
+    deselectMedia() {
+      this.messageFile = "";
+    },
+    handleFile(event) {
+      this.messageFile = event.target.files;
+    },
+    sentMsg() {
       var element = document.getElementById("messageBox");
+      if (!element.value) return;
       this.$store.commit("storedata/sentMessage", element.value);
+      element.value = "";
     },
   },
 };
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 .chat-form {
   width: var(--hds-chatbox-form-width);
   height: var(--hds-chatbox-form-height);
@@ -90,15 +95,9 @@ export default {
   cursor: pointer;
 }
 
-.chat-form .chat-input-group .chat-icon > img {
-  height: var(--hds-chatbox-form-input-chat-icon-height);
-  width: var(--hds-chatbox-form-input-chat-icon-width);
-  transform: rotate(-45deg);
-}
-
-.chat-form .chat-input-group .chat-icon2 > img {
-  height: var(--hds-chatbox-form-input-chat-icon-height);
-  width: var(--hds-chatbox-form-input-chat-icon-width);
+.chat-form .chat-input-group .chat-icon {
+  font-size: 20px;
+  color: grey;
 }
 
 .chat-textbox {

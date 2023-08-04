@@ -15,12 +15,24 @@
           class="skill-icon"
           :style="{ background: skill?.iconBackgroundColor }"
         >
-          <img :src="skill?.icon" alt="" />
+          <span
+            class="material-icons iconSize"
+            :style="{ color: `${skill?.color}` }"
+          >
+            {{ skill?.icon }}
+          </span>
         </div>
         <div class="skill-info">
           <span>{{ skill?.title }}</span>
           <div class="route-icon">
-            <img :src="popularDataSkill.arrowIcon" alt="" />
+            <span
+              class="material-icons iconSize"
+              :style="{
+                color: '#25282E',
+              }"
+            >
+              chevron_right
+            </span>
           </div>
         </div>
       </div>
@@ -31,14 +43,42 @@
 <script>
 export default {
   name: "GenAIChatLandingActionButtons",
-  props: {
-    popularDataSkill: Object,
+  data() {
+    return {
+      popularDataSkill: {
+        useTemplate: true,
+        title: "Start Exploring Popular Data Skills",
+        icon: "./assets/icons/bolt.svg",
+        arrowIcon: "chevron_right",
+        showPopularDataSkill: true,
+        dataSkills: [
+          {
+            icon: "question_mark",
+            iconBackgroundColor: "#E6F3F1",
+            color: "#389D91",
+            title: "General Insights Questions",
+          },
+          {
+            icon: "search",
+            iconBackgroundColor: "#FBF0FF",
+            color: "#C261FF",
+            title: "Explore and Run Diagnostics",
+          },
+          {
+            icon: "call_made",
+            iconBackgroundColor: "#FAEDE6",
+            color: "#D67139",
+            title: "Future and “What if” Scenarios",
+          },
+        ],
+      },
+    };
   },
 };
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 
 .action-button-container {
   margin-bottom: 20px;

@@ -1,29 +1,13 @@
 <template>
-  <div class="header" v-show="chatBoxHeader?.showChatBoxHeader">
-    <svg
-      @click="this.$store.commit('storedata/closeSideBar')"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g id="close">
-        <path
-          id="Union"
-          d="M12.7593 11.7187L17.1793 7.29871C17.253 7.23005 17.3121 7.14725 17.3531 7.05525C17.3941 6.96325 17.4162 6.86393 17.4179 6.76323C17.4197 6.66253 17.4012 6.5625 17.3635 6.46911C17.3257 6.37572 17.2696 6.29089 17.1984 6.21967C17.1272 6.14845 17.0423 6.09231 16.9489 6.05459C16.8555 6.01686 16.7555 5.99834 16.6548 6.00012C16.5541 6.00189 16.4548 6.02394 16.3628 6.06493C16.2708 6.10592 16.188 6.16502 16.1193 6.23871L11.6993 10.6587L7.27934 6.23871C7.13716 6.10623 6.94912 6.0341 6.75482 6.03753C6.56052 6.04096 6.37513 6.11967 6.23772 6.25709C6.10031 6.3945 6.02159 6.57988 6.01816 6.77419C6.01474 6.96849 6.08686 7.15653 6.21934 7.29871L10.6393 11.7187L6.21934 16.1387C6.07889 16.2793 6 16.47 6 16.6687C6 16.8675 6.07889 17.0581 6.21934 17.1987C6.35997 17.3392 6.55059 17.418 6.74934 17.418C6.94809 17.418 7.13871 17.3392 7.27934 17.1987L11.6993 12.7787L16.1193 17.1987C16.26 17.3392 16.4506 17.418 16.6493 17.418C16.8481 17.418 17.0387 17.3392 17.1793 17.1987C17.3198 17.0581 17.3987 16.8675 17.3987 16.6687C17.3987 16.47 17.3198 16.2793 17.1793 16.1387L12.7593 11.7187Z"
-          fill="#25282E"
-        />
-      </g>
-    </svg>
-    <p
-      style="flex: 1"
-      @click="this.$store.commit('storedata/gotoLandingPage', inputText)"
-    >
+  <div class="header">
+    <span class="material-icons iconSize" @click="closeSidebarMutation">
+      close
+    </span>
+    <p style="flex: 1" @click="gotoLandingPageMutation">
       {{ chatBoxHeader?.title }}
     </p>
 
-    <svg
+    <!-- <svg
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -37,7 +21,7 @@
           fill="#25282E"
         />
       </g>
-    </svg>
+    </svg> -->
   </div>
 </template>
 
@@ -45,13 +29,24 @@
 export default {
   name: "GenAiChatHeader",
   props: {
-    chatBoxHeader: Object,
+    chatBoxHeader: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    closeSidebarMutation() {
+      return this.$store.commit("storedata/closeSideBar");
+    },
+    gotoLandingPageMutation() {
+      return this.$store.commit("storedata/gotoLandingPage");
+    },
   },
 };
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 .header {
   padding: 1rem;
   display: flex;

@@ -9,14 +9,23 @@
 export default {
   name: "GenAIChatTagbutton",
   props: {
-    buttonDetails: Object,
-    buttonProps: Object,
+    buttonDetails: {
+      type: Object,
+      required: false,
+      default: () => {
+        return { background: "#e6f7ff", color: "#005ac2" };
+      },
+    },
+    buttonProps: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 .tag-button {
   padding: var(--hds-chatbox-TagButton-padding);
   font-weight: var(--hds-chatbox-TagButton-font-weight);

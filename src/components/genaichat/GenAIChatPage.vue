@@ -2,21 +2,24 @@
   <GenAIChatHeader :chatBoxHeader="chatBoxHeader" />
 
   <GenAIChatLanding
-    v-if="!$store.state.storedata.chatMessages?.length"
-    :chatBoxStyle="chatBoxStyle"
+    v-if="!get_chatMessages?.length"
     :emptyChatContent="emptyChatContent"
     :savedTemplates="savedTemplates"
   />
 
-  <GenAIChatUI v-else :chatBoxStyle="chatBoxStyle" :userDetails="userDetails" />
+  <GenAIChatUI v-else />
 </template>
 
 <script>
-import GenAIChatHeader from "./header/GenAIChatHeader.vue";
-import GenAIChatLanding from "./content/landing/GenAIChatLanding.vue";
-import GenAIChatUI from "./GenAIChatUI.vue";
+import GenAIChatHeader from "src/components/genaichat/header/GenAIChatHeader.vue";
+import GenAIChatLanding from "src/components/genaichat/content/landing/GenAIChatLanding.vue";
+import GenAIChatUI from "src/components/genaichat/GenAIChatUI.vue";
+import { mapGetters } from "vuex";
 
 export default {
+  computed: {
+    ...mapGetters("storedata", ["get_chatMessages"]),
+  },
   name: "GenAIChatPage",
   components: {
     GenAIChatHeader,
@@ -24,20 +27,38 @@ export default {
     GenAIChatUI,
   },
   props: {
-    chatBoxStyle: Object,
-    emptyChatContent: Object,
-    chatBoxHeader: Object,
-    savedTemplates: Object,
-    userDetails: Object,
-  },
-  data() {
-    return {};
+    emptyChatContent: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {
+          showEmptyChatHeader: true,
+          title: "AI-Driven Insights Companion",
+          inputPlaceholder: "Ask your data question",
+          searchIcon: "../assets/icons/search.svg",
+        };
+      },
+    },
+    chatBoxHeader: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {
+          title: "AI Exploration",
+          showChatBoxHeader: true,
+        };
+      },
+    },
+    savedTemplates: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 .chat-landing {
   padding: calc(2 * var(--hds-chatbox-padding));
   background: var(--hds-chatbox-background);

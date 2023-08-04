@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import GenAIChatHeader from "../header/GenAIChatHeader.vue";
+import GenAIChatHeader from "src/components/genaichat/header/GenAIChatHeader.vue";
 
 export default {
   name: "GenAIChatRecent",
@@ -14,9 +14,14 @@ export default {
     GenAIChatHeader,
   },
   props: {
-    chatBoxHeader: Object,
-    userDetails: Object,
-    Content: String,
+    chatBoxHeader: {
+      type: Object,
+      required: true,
+    },
+    Content: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>

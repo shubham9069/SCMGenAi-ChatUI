@@ -9,7 +9,19 @@
 <script>
 export default {
   name: "GenAIChatDropDown",
-  props: { dropDownToggle: Boolean, dropDownList: Array },
+  props: {
+    dropDownToggle: {
+      type: Boolean,
+      required: true,
+    },
+    dropDownList: {
+      type: Array,
+      required: false,
+      defaultValue: () => {
+        return ["Pin"];
+      },
+    },
+  },
   computed: {
     toggle() {
       return { display: this.dropDownToggle ? "Block" : "none" };

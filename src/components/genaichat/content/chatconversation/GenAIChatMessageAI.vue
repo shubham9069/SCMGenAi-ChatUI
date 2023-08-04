@@ -2,7 +2,10 @@
   <div class="wrapper-ai">
     <div class="chat-ai">
       <GenAIChatMessageHeader
-        :userDetails="{ name: 'Ai Logo', image: chatBoxStyle?.logo }"
+        :userDetails="{
+          name: 'Ai Logo',
+          image: './assets/icons/ai-gradient.svg',
+        }"
         type="Ai"
         :message="message"
         :collapseChat="collapseChat"
@@ -10,73 +13,22 @@
       />
 
       <div v-if="collapseChat">
-        <GenAIChatMessageContainer
-          :message="message"
-          v-if="!message?.isChatActionArea"
-        />
-
-        <div class="chat-action" v-else>
-          <p>{{ message?.areaActionButtonOption?.title }}</p>
-          <div class="center-div">
-            <!-- for cutsom color you have to use inline css Button component  -->
-            <GenAIChatTagbutton
-              :buttonProps="{
-                background: '#e6f7ff',
-                color: '#005ac2',
-              }"
-              :buttonDetails="{
-                Icon: message?.areaActionButtonOption?.secondaryButtonIcon,
-                Text: message?.areaActionButtonOption?.secondaryButtonText,
-              }"
-            />
-
-            <GenAIChatTagbutton
-              v-if="!this.pinToggle"
-              @click="pinToggle = true"
-              :buttonProps="{
-                background: '#0074e8',
-                color: 'white',
-              }"
-              :buttonDetails="{
-                Icon: message?.areaActionButtonOption?.primaryButtonIcon,
-                Text: message?.areaActionButtonOption?.primaryButtonText,
-              }"
-            />
-            <GenAIChatTagbutton
-              v-else
-              @click="pinToggle = false"
-              :buttonProps="{
-                background: '#d0d7de',
-                'text-color': '#25282e',
-              }"
-              :buttonDetails="{
-                Icon: './assets/icons/pin.svg',
-                Text: 'Unpin',
-              }"
-            />
-          </div>
-        </div>
+        <GenAIChatMessageContainer :message="message" />
       </div>
       <GenAIChatMessageFooter :iconArr="iconArr" />
     </div>
     <div class="suggestion-box">
       <!-- suggestion component -->
-      <GenAIPromptSuggestion
-        @click="
-          this.$store.commit('storedata/chatActionAreaToggle', message?.id)
-        "
-        v-bind="{ title: 'Make This Widget' }"
-      />
+      <GenAIPromptSuggestion title="Make This Widget" />
     </div>
   </div>
 </template>
 
 <script>
-import GenAIChatMessageHeader from "./GenAIChatMessageHeader.vue";
-import GenAIChatMessageFooter from "./GenAIChatMessageFooter.vue";
-import GenAIChatMessageContainer from "./GenAIChatMessageContainer.vue";
-import GenAIChatTagbutton from "../common/GenAIChatTagbutton.vue";
-import GenAIPromptSuggestion from "../common/GenAIPromptSuggestion.vue";
+import GenAIChatMessageHeader from "src/components/genaichat/content/chatconversation/GenAIChatMessageHeader.vue";
+import GenAIChatMessageFooter from "src/components/genaichat/content/chatconversation/GenAIChatMessageFooter.vue";
+import GenAIChatMessageContainer from "src/components/genaichat/content/chatconversation/GenAIChatMessageContainer.vue";
+import GenAIPromptSuggestion from "src/components/genaichat/content/common/GenAIPromptSuggestion.vue";
 
 export default {
   name: "GenAIChatMessageUser",
@@ -84,12 +36,13 @@ export default {
     GenAIChatMessageHeader,
     GenAIChatMessageFooter,
     GenAIChatMessageContainer,
-    GenAIChatTagbutton,
     GenAIPromptSuggestion,
   },
   props: {
-    chatBoxStyle: Object,
-    message: Object,
+    message: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -98,22 +51,26 @@ export default {
       iconArr: [
         {
           name: "FooterIcon1",
-          src: "assets/icons/FooterIcon1.png",
+          src: "mdi-pin",
+          color: "black",
           action: "",
         },
         {
           name: "FooterIcon2",
-          src: "assets/icons/FooterIcon2.png",
+          src: "mdi-share-variant",
+          color: "yellow",
           action: "",
         },
         {
           name: "FooterIcon3",
-          src: "assets/icons/FooterIcon3.png",
+          src: "mdi-thumb-up",
+          color: "#42f5dd",
           action: "",
         },
         {
           name: "FooterIcon4",
-          src: "assets/icons/FooterIcon4.png",
+          src: "mdi-thumb-down",
+          color: "#f7113f",
           action: "",
         },
       ],
@@ -124,7 +81,7 @@ export default {
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 .wrapper-ai {
   width: var(--hds-chatbox-warpper-input-width);
   display: flex;
@@ -139,7 +96,7 @@ export default {
   background: var(--hds-chatbox-warpper-input-background);
   border: var(--hds-chatbox-warpper-input-border);
   border-radius: var(--hds-chatbox-warpper-input-border-radius);
-  padding: var(--hds-chatbox-container-message-padding);
+
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
     rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   position: relative;

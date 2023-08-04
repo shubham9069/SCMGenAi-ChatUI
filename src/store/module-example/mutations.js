@@ -11,6 +11,7 @@ export function closeSideBar(state, label) {
   state.isVisible = false;
 }
 export function sentMessage(state, inputText) {
+  state.isLoading = false;
   const obj = {
     isAI: false,
     text: inputText,
@@ -27,12 +28,13 @@ export function sentMessage(state, inputText) {
       primaryButtonIcon: "./assets/icons/placeholder.svg",
       secondaryButtonIcon: "./assets/icons/placeholder.svg",
     },
-    isDisabled: false,
-    date: new Date().toISOString(),
+    isLoading: false,
+    date: new Date(),
   };
   state.chatMessages.push(obj, {
     ...obj,
     isAI: true,
+    isLoading: true,
     id: state.chatMessages?.length + 1,
   });
 
@@ -58,4 +60,8 @@ export function chatActionAreaToggle(state, id) {
       ? { ...msg, isChatActionArea: !msg.isChatActionArea }
       : msg;
   });
+}
+
+export function load(state) {
+  console.log(state);
 }

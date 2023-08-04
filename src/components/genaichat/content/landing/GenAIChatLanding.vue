@@ -1,7 +1,16 @@
 <template>
   <div class="chat-landing">
     <div class="chat-landing-header">
-      <img :src="chatBoxStyle.logo" />
+      <span
+        class="material-icons iconSize"
+        :style="{
+          background: 'linear-gradient(135deg, #0074E8 0%, #A933FB 100%)',
+          webkitBackgroundClip: 'text',
+          webkitTextFillColor: 'transparent',
+        }"
+      >
+        auto_awesome
+      </span>
       <p>{{ emptyChatContent?.title }}</p>
     </div>
 
@@ -10,38 +19,48 @@
         id="search-Box"
         type="text"
         :placeholder="emptyChatContent?.inputPlaceholder"
-        @keyup.enter="
-          ($event) => {
-            this.$store.commit('storedata/sentMessage', $event.target.value);
-            $event.target.value = '';
-          }
-        "
+        @keyup.enter="sentMsg"
       />
-      <div @click="sentMsgBySearchIcon">
-        <img :src="emptyChatContent?.searchIcon" />
+      <div @click="sentMsg">
+        <span
+          class="material-icons iconSize"
+          :style="{
+            color: 'white',
+          }"
+        >
+          search
+        </span>
       </div>
     </div>
 
-    <GenAIChatLandingActionButtons :popularDataSkill="popularDataSkill" />
+    <GenAIChatLandingActionButtons />
 
     <div className="chat-landing-Suggestion">
-      <span
-        ><img :src="savedTemplates?.icon" /> {{ savedTemplates?.title }}</span
+      <span>
+        <span
+          class="material-icons iconSize"
+          :style="{
+            color: '#06025c',
+          }"
+        >
+          search
+        </span>
+        {{ savedTemplates?.title }}</span
       >
       <!-- suggestion component  -->
       <GenAIPromptSuggestion
         v-for="data in savedTemplates.templates"
         :key="data?.title"
-        @click="this.$store.commit('storedata/sentMessage', data.title)"
-        v-bind="{ title: data?.title }"
+        @click="sentMessageMutaion(data.title)"
+        :title="data?.title"
       />
     </div>
   </div>
 </template>
 
 <script>
-import GenAIPromptSuggestion from "../common/GenAIPromptSuggestion.vue";
-import GenAIChatLandingActionButtons from "./GenAIChatLandingActionButtons.vue";
+import GenAIPromptSuggestion from "src/components/genaichat/content/common/GenAIPromptSuggestion.vue";
+import GenAIChatLandingActionButtons from "src/components/genaichat/content/landing/GenAIChatLandingActionButtons.vue";
 
 export default {
   name: "GenAIChatLanding",
@@ -50,49 +69,32 @@ export default {
     GenAIPromptSuggestion,
   },
   props: {
-    chatBoxStyle: Object,
-    emptyChatContent: Object,
-    savedTemplates: Object,
+    emptyChatContent: {
+      type: Object,
+      required: false,
+    },
+    savedTemplates: {
+      type: Object,
+      required: true,
+    },
   },
-  data() {
-    return {
-      popularDataSkill: {
-        useTemplate: true,
-        title: "Start Exploring Popular Data Skills",
-        icon: "./assets/icons/bolt.svg",
-        arrowIcon: "../assets/icons/arrow-right.svg",
-        showPopularDataSkill: true,
-        dataSkills: [
-          {
-            icon: "./assets/icons/question.svg",
-            iconBackgroundColor: "#E6F3F1",
-            title: "General Insights Questions",
-          },
-          {
-            icon: "./assets/icons/searchicon.svg",
-            iconBackgroundColor: "#FBF0FF",
-            title: "Explore and Run Diagnostics",
-          },
-          {
-            icon: "./assets/icons/routeicon.svg",
-            iconBackgroundColor: "#FAEDE6",
-            title: "Future and “What if” Scenarios",
-          },
-        ],
-      },
-    };
-  },
+
   methods: {
-    sentMsgBySearchIcon() {
+    sentMsg() {
       var element = document?.getElementById("search-Box");
+      if (!element.value) return;
       this.$store.commit("storedata/sentMessage", element.value);
+      element.value = "";
+    },
+    sentMessageMutaion(title) {
+      return this.$store.commit("storedata/sentMessage", title);
     },
   },
 };
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 
 .chat-landing-header {
   display: flex;
@@ -115,6 +117,7 @@ export default {
   display: flex;
   padding: var(--hds-chatbox-header-paddingY);
 }
+
 .chat-landing-input input {
   width: var(--hds-chatbox-input-width);
   height: var(--hds-chatbox-input-height);

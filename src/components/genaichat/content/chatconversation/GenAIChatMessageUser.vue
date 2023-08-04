@@ -2,7 +2,6 @@
   <div class="wrapper-ai wrapper-user">
     <div class="chat-ai">
       <GenAIChatMessageHeader
-        :userDetails="userDetails"
         type="User"
         :message="message"
         :collapseChat="collapseChat"
@@ -17,8 +16,8 @@
 </template>
 
 <script>
-import GenAIChatMessageHeader from "./GenAIChatMessageHeader.vue";
-import GenAIChatMessageContainer from "./GenAIChatMessageContainer.vue";
+import GenAIChatMessageHeader from "src/components/genaichat/content/chatconversation/GenAIChatMessageHeader.vue";
+import GenAIChatMessageContainer from "src/components/genaichat/content/chatconversation/GenAIChatMessageContainer.vue";
 
 export default {
   name: "GenAIChatMessageUser",
@@ -32,14 +31,16 @@ export default {
     };
   },
   props: {
-    userDetails: Object,
-    message: Object,
+    message: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>
 
 <style>
-@import "/src/assets/css/variable.css";
+@import "src/assets/css/variable.css";
 
 .wrapper-user .chat-ai {
   background: var(--hds-chatbox-container-chat-background);
