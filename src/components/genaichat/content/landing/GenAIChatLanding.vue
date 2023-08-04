@@ -1,14 +1,7 @@
 <template>
   <div class="chat-landing">
     <div class="chat-landing-header">
-      <span
-        class="material-icons iconSize"
-        :style="{
-          background: 'linear-gradient(135deg, #0074E8 0%, #A933FB 100%)',
-          webkitBackgroundClip: 'text',
-          webkitTextFillColor: 'transparent',
-        }"
-      >
+      <span class="material-icons iconSize" :style="get_gradientIcon">
         auto_awesome
       </span>
       <p>{{ emptyChatContent?.title }}</p>
@@ -61,8 +54,12 @@
 <script>
 import GenAIPromptSuggestion from "src/components/genaichat/content/common/GenAIPromptSuggestion.vue";
 import GenAIChatLandingActionButtons from "src/components/genaichat/content/landing/GenAIChatLandingActionButtons.vue";
+import { mapGetters } from "vuex";
 
 export default {
+  computed: {
+    ...mapGetters({ get_gradientIcon: "storedata/get_gradientIcon" }),
+  },
   name: "GenAIChatLanding",
   components: {
     GenAIChatLandingActionButtons,

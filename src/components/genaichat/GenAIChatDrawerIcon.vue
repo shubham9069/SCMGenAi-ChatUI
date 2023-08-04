@@ -1,15 +1,6 @@
 <template>
   <div class="chatdrawer-icon" :style="gradientColor(item?.label)">
-    <span
-      class="material-icons"
-      :style="{
-        color: `${
-          get_isVisible && item?.label == get_selectedLabel
-            ? 'white'
-            : item?.color
-        }`,
-      }"
-    >
+    <span class="material-icons" :style="iconColor(item?.label, item?.color)">
       {{ item?.icon }}
     </span>
   </div>
@@ -19,7 +10,10 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters("storedata", ["get_isVisible", "get_selectedLabel"]),
+    ...mapGetters({
+      get_isVisible: "storedata/get_isVisible",
+      get_selectedLabel: "storedata/get_selectedLabel",
+    }),
   },
   name: "GenAIChatDrawerIcon",
   props: {
@@ -35,6 +29,15 @@ export default {
           this.get_isVisible && label == this.get_selectedLabel
             ? "linear-gradient(135deg, #0074E8 0%, #A933FB 100%)"
             : "transparent",
+      };
+    },
+    iconColor(label, color) {
+      return {
+        color: `${
+          this.get_isVisible && label == this.get_selectedLabel
+            ? "white"
+            : color
+        }`,
       };
     },
   },

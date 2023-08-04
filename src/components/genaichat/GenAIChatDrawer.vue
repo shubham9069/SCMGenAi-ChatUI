@@ -62,7 +62,10 @@ import { mapGetters } from "vuex";
 /* eslint-disable vue/no-unused-components */
 export default {
   computed: {
-    ...mapGetters("storedata", ["get_isVisible", "get_selectedLabel"]),
+    ...mapGetters({
+      get_isVisible: "storedata/get_isVisible",
+      get_selectedLabel: "storedata/get_selectedLabel",
+    }),
   },
   name: "GenAIChatDrawer",
   emits: ["splitter"],

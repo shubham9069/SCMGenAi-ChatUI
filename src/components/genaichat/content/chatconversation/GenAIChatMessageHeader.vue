@@ -5,13 +5,14 @@
       :style="{ padding: `${type == 'Ai' ? '5px' : '0px'}` }"
     >
       <span class="material-icons" v-if="type == 'Ai'"> auto_awesome </span>
-      <img :src="$store.state.demostore.userDetails?.image" alt="" v-else />
+      <img :src="userDetails?.image" alt="" v-else />
     </div>
     <div class="ai-profile-head">
       <div class="profile-info">
         <span class="user-name">{{
-          type == "Ai" ? "Ai Gen" : $store.state.demostore.userDetails?.name
+          type == "Ai" ? "Ai Gen" : userDetails?.name
         }}</span>
+
         <span class="chat-date">{{ moment(message?.date).fromNow() }}</span>
       </div>
     </div>
@@ -49,9 +50,6 @@ import moment from "moment";
 import { mapGetters } from "vuex";
 
 export default {
-  // computed: {
-  //   ...mapGetters("storedata", ["get_userDetails"]),
-  // },
   name: "GenAIChatMessageHeader",
   emits: ["collapseMessageContainer"],
   components: {
@@ -87,6 +85,9 @@ export default {
         transform: `${this.collapseChat ? "rotate(0)" : "rotate(180deg)"}`,
         color: "grey",
       };
+    },
+    userDetails() {
+      return this.$store.getters["demodata/get_userDetails"];
     },
   },
 };

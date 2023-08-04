@@ -23,7 +23,7 @@ import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters("storedata", ["get_chatMessages"]),
+    ...mapGetters({ get_chatMessages: "storedata/get_chatMessages" }),
   },
   name: "GenAIChatUI",
   components: {

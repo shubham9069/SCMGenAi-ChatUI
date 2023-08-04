@@ -2,10 +2,6 @@
   <div class="wrapper-ai">
     <div class="chat-ai">
       <GenAIChatMessageHeader
-        :userDetails="{
-          name: 'Ai Logo',
-          image: './assets/icons/ai-gradient.svg',
-        }"
         type="Ai"
         :message="message"
         :collapseChat="collapseChat"
