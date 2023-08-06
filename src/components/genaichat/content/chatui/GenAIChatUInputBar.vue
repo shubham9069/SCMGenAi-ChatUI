@@ -58,7 +58,7 @@ export default {
     sentMsg() {
       var element = document.getElementById("messageBox");
       if (!element.value) return;
-      this.$store.commit("storedata/sentMessage", element.value);
+      this.$store.dispatch("storedata/sentMessage", element.value);
       element.value = "";
     },
   },

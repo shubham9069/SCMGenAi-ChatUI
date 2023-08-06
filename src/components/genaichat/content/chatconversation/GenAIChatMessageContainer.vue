@@ -1,5 +1,12 @@
 <template>
-  <div class="message" v-if="message.isAI && false">
+  <div
+    class="message"
+    v-if="
+      message.isAI &&
+      $store.state.storedata.isLoading &&
+      message.id == $store.state.storedata.chatMessages.length - 1
+    "
+  >
     <q-spinner-dots color="black" size="2em" />
   </div>
 

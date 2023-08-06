@@ -7,11 +7,11 @@ export default {
     }
     state.selectedLabel = label;
   },
-  closeSideBar: (state, label) => {
+  closeSideBar: (state) => {
     state.isVisible = false;
   },
   sentMessage: (state, inputText) => {
-    state.isLoading = false;
+    state.isLoading = true;
     const obj = {
       isAI: false,
       text: inputText,
@@ -58,5 +58,8 @@ export default {
         ? { ...msg, isChatActionArea: !msg.isChatActionArea }
         : msg;
     });
+  },
+  setLoading: (state, value) => {
+    state.isLoading = value;
   },
 };

@@ -34,12 +34,12 @@ export default {
       required: true,
     },
   },
-  computed: {
+  methods: {
     closeSidebarMutation() {
-      return this.$store.commit("storedata/closeSideBar");
+      return this.$store.dispatch("storedata/closeSideBar");
     },
     gotoLandingPageMutation() {
-      return this.$store.commit("storedata/gotoLandingPage");
+      return this.$store.dispatch("storedata/gotoLandingPage");
     },
   },
 };

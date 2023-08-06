@@ -80,11 +80,11 @@ export default {
     sentMsg() {
       var element = document?.getElementById("search-Box");
       if (!element.value) return;
-      this.$store.commit("storedata/sentMessage", element.value);
+      this.$store.dispatch("storedata/sentMessage", element.value);
       element.value = "";
     },
     sentMessageMutaion(title) {
-      return this.$store.commit("storedata/sentMessage", title);
+      return this.$store.dispatch("storedata/sentMessage", title);
     },
   },
 };

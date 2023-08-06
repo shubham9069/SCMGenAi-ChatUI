@@ -172,7 +172,7 @@ export default {
   },
   methods: {
     activeComponent(itemLabel) {
-      this.$store.commit("storedata/SelectedLabelFunc", itemLabel);
+      this.$store.dispatch("storedata/SelectedLabelFunc", itemLabel);
     },
   },
 };
