@@ -10,14 +10,22 @@
     <q-spinner-dots color="black" size="2em" />
   </div>
 
+  <div class="message" :id="message?.id" v-else-if="message?.chart">
+    <GenAIChatBarChart :graphArr="message?.chartInfo?.chartArr" />
+  </div>
   <div class="message" :id="message?.id" v-else>
     {{ message?.text }}
   </div>
 </template>
 
 <script>
+import GenAIChatBarChart from "src/components/genaichat/charts/apex/GenAIChatBarChart.vue";
+
 export default {
   name: "GenAIChatMessageContainer",
+  components: {
+    GenAIChatBarChart,
+  },
   props: {
     message: {
       type: Object,

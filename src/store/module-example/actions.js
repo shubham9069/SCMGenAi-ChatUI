@@ -11,6 +11,12 @@ export default {
       commit("setLoading", false);
     }, 1000);
   },
+  sentAnalytics: ({ dispatch, commit }, params) => {
+    commit("sentAnalytics", params);
+    setTimeout(() => {
+      commit("setLoading", false);
+    }, 1000);
+  },
   gotoLandingPage: ({ dispatch, commit }) => {
     commit("gotoLandingPage");
   },

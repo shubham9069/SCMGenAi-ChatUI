@@ -10,6 +10,7 @@
         class="skill-card"
         v-for="skill in popularDataSkill.dataSkills"
         :key="skill?.title"
+        @click="skill?.clickFun"
       >
         <div
           class="skill-icon"
@@ -57,6 +58,7 @@ export default {
             iconBackgroundColor: "#E6F3F1",
             color: "#389D91",
             title: "General Insights Questions",
+            clickFun: this.AnalyticsReport,
           },
           {
             icon: "search",
@@ -73,6 +75,14 @@ export default {
         ],
       },
     };
+  },
+  methods: {
+    AnalyticsReport() {
+      return this.$store.dispatch(
+        "storedata/sentAnalytics",
+        "chart represtation "
+      );
+    },
   },
 };
 </script>
@@ -109,6 +119,7 @@ export default {
 .action-button-container .action-button-list .skill-card {
   padding: var(--hds-chatbox-action-button-card-padding);
   display: grid;
+  cursor: pointer;
   grid-template-columns: var(
     --hds-chatbox-action-button-card-grid-template-columns
   );
