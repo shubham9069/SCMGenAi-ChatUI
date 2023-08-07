@@ -1,6 +1,6 @@
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
-import storedata from "./module-example/index";
+import storedata from "./scmgenaistore/index";
 
 // import example from './module-example'
 
