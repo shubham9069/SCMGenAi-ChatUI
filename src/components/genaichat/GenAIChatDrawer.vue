@@ -1,12 +1,7 @@
 <template>
   <div class="chat-drawer">
     <!-- left sidebox  -->
-    <section
-      class="sidebox"
-      :style="{
-        display: `${get_isVisible ? 'Block' : 'none'}`,
-      }"
-    >
+    <section class="sidebox" :style="{ display: getVisibleFunc }">
       <div class="bottom">
         <GenAIChatPage v-bind="ChatProps" v-if="get_selectedLabel == 'Ai'" />
 
@@ -61,12 +56,6 @@ import { mapGetters } from "vuex";
 // this comment used for to handle not usedcomponent importing warn
 /* eslint-disable vue/no-unused-components */
 export default {
-  computed: {
-    ...mapGetters({
-      get_isVisible: "storedata/get_isVisible",
-      get_selectedLabel: "storedata/get_selectedLabel",
-    }),
-  },
   name: "GenAIChatDrawer",
   emits: ["splitter"],
   components: {
@@ -173,6 +162,15 @@ export default {
   methods: {
     activeComponent(itemLabel) {
       this.$store.dispatch("storedata/SelectedLabelFunc", itemLabel);
+    },
+  },
+  computed: {
+    ...mapGetters({
+      get_isVisible: "storedata/get_isVisible",
+      get_selectedLabel: "storedata/get_selectedLabel",
+    }),
+    getVisibleFunc() {
+      return this.get_isVisible ? "Block" : "none";
     },
   },
 };

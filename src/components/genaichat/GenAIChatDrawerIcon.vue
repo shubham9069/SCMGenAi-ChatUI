@@ -1,6 +1,12 @@
 <template>
-  <div class="chatdrawer-icon" :style="gradientColor(item?.label)">
-    <span class="material-icons" :style="iconColor(item?.label, item?.color)">
+  <div
+    class="chatdrawer-icon"
+    :style="{ background: gradientColor(item?.label) }"
+  >
+    <span
+      class="material-icons"
+      :style="{ color: iconColor(item?.label, item?.color) }"
+    >
       {{ item?.icon }}
     </span>
   </div>
@@ -24,21 +30,14 @@ export default {
   },
   methods: {
     gradientColor(label) {
-      return {
-        background:
-          this.get_isVisible && label == this.get_selectedLabel
-            ? "linear-gradient(135deg, #0074E8 0%, #A933FB 100%)"
-            : "transparent",
-      };
+      return this.get_isVisible && label == this.get_selectedLabel
+        ? "linear-gradient(135deg, #0074E8 0%, #A933FB 100%)"
+        : "transparent";
     },
     iconColor(label, color) {
-      return {
-        color: `${
-          this.get_isVisible && label == this.get_selectedLabel
-            ? "white"
-            : color
-        }`,
-      };
+      return this.get_isVisible && label == this.get_selectedLabel
+        ? "white"
+        : color;
     },
   },
 };

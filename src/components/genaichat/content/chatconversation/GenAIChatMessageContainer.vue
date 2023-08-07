@@ -10,7 +10,12 @@
     <q-spinner-dots color="black" size="2em" />
   </div>
 
-  <div class="message" :id="message?.id" v-else-if="message?.chart">
+  <div
+    class="message"
+    :id="message?.id"
+    v-else-if="message?.chart"
+    :style="{ maxWidth: '500px' }"
+  >
     <GenAIChatBarChart :graphArr="message?.chartInfo?.chartArr" />
   </div>
   <div class="message" :id="message?.id" v-else>

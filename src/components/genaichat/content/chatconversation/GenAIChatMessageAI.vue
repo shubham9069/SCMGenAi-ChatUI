@@ -5,7 +5,7 @@
         type="Ai"
         :message="message"
         :collapseChat="collapseChat"
-        @collapseMessageContainer="this.collapseChat = !this.collapseChat"
+        @collapseMessageContainer="toggleContainerFunc"
       />
 
       <div v-if="collapseChat">
@@ -72,7 +72,11 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    toggleContainerFunc() {
+      return (this.collapseChat = !this.collapseChat);
+    },
+  },
 };
 </script>
 

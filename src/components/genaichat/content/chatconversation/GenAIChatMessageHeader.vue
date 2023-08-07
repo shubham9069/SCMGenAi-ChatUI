@@ -1,17 +1,13 @@
 <template>
   <div class="chat-profile-info">
-    <div
-      class="profile-icon"
-      :style="{ padding: `${type == 'Ai' ? '5px' : '0px'}` }"
-    >
+    <div class="profile-icon" :style="{ padding: profileIconPadding }">
       <span class="material-icons" v-if="type == 'Ai'"> auto_awesome </span>
+
       <img :src="userDetails?.image" alt="" v-else />
     </div>
     <div class="ai-profile-head">
       <div class="profile-info">
-        <span class="user-name">{{
-          type == "Ai" ? "Ai Gen" : userDetails?.name
-        }}</span>
+        <span class="user-name">{{ userName }}</span>
 
         <span class="chat-date">{{ moment(message?.date).fromNow() }}</span>
       </div>
@@ -29,7 +25,7 @@
       <span
         class="material-icons iconSize"
         :style="{ color: 'grey' }"
-        @click="this.dropDownToggle = !this.dropDownToggle"
+        @click="dropDownToggleFunc"
       >
         more_horiz
       </span>
@@ -78,16 +74,25 @@ export default {
     moment: function () {
       return moment();
     },
+    dropDownToggleFunc() {
+      return (this.dropDownToggle = !this.dropDownToggle);
+    },
   },
   computed: {
+    ...mapGetters({
+      userDetails: "demodata/get_userDetails",
+    }),
     collapse() {
       return {
         transform: `${this.collapseChat ? "rotate(0)" : "rotate(180deg)"}`,
         color: "grey",
       };
     },
-    userDetails() {
-      return this.$store.getters["demodata/get_userDetails"];
+    profileIconPadding() {
+      return this.type == "Ai" ? "5px" : "0px";
+    },
+    userName() {
+      return this.type == "Ai" ? "Ai Gen" : this.userDetails?.name;
     },
   },
 };
