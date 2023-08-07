@@ -1,12 +1,12 @@
 <template>
   <div class="chat-drawer">
     <!-- left sidebox  -->
-    <section class="sidebox" :style="{ display: getVisibleFunc }">
+    <section class="sidebox" :style="{ display: getVisible }">
       <div class="bottom">
-        <GenAIChatPage v-bind="ChatProps" v-if="get_selectedLabel == 'Ai'" />
+        <GenAIChatPage v-bind="chatProps" v-if="get_selectedLabel == 'Ai'" />
 
         <GenAIChatRecent
-          v-bind="RecentProps"
+          v-bind="recentProps"
           v-if="get_selectedLabel == 'Recent'"
         />
       </div>
@@ -57,7 +57,7 @@ import { mapGetters } from "vuex";
 /* eslint-disable vue/no-unused-components */
 export default {
   name: "GenAIChatDrawer",
-  emits: ["splitter"],
+
   components: {
     GenAIChatDrawerIcon,
     GenAIChatPage,
@@ -65,7 +65,7 @@ export default {
   },
   data() {
     return {
-      ChatProps: {
+      chatProps: {
         emptyChatContent: {
           title: "AI-Driven Insights Companion",
           inputPlaceholder: "Ask your data question",
@@ -92,13 +92,13 @@ export default {
           ],
         },
       },
-      RecentProps: {
+      recentProps: {
         chatBoxHeader: {
-          // required
+          // require
           title: "Recent",
           showChatBoxHeader: true,
         },
-        Content: "shubham Recent Search ",
+        content: "shubham Recent Search ",
       },
       toolkitItems: [
         {
@@ -161,7 +161,7 @@ export default {
   },
   methods: {
     activeComponent(itemLabel) {
-      this.$store.dispatch("storedata/SelectedLabelFunc", itemLabel);
+      this.$store.dispatch("storedata/selectedLabelFunc", itemLabel);
     },
   },
   computed: {
@@ -169,7 +169,7 @@ export default {
       get_isVisible: "storedata/get_isVisible",
       get_selectedLabel: "storedata/get_selectedLabel",
     }),
-    getVisibleFunc() {
+    getVisible() {
       return this.get_isVisible ? "Block" : "none";
     },
   },

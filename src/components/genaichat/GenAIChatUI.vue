@@ -3,10 +3,14 @@
     <div class="chat-container chat-landing" id="chatui-container">
       <template v-for="(message, index) in get_chatMessages" :key="index">
         <!-- wrapper Ai component  -->
-        <GenAIChatMessageAI v-if="message?.isAI" :message="message" />
+        <q-chat-message v-if="message?.isAI" bg-color="transparent" size="12">
+          <GenAIChatMessageAI :message="message" />
+        </q-chat-message>
 
         <!-- wrapper User Component  -->
-        <GenAIChatMessageUser v-else :message="message" />
+        <q-chat-message v-else bg-color="transparent" size="12">
+          <GenAIChatMessageUser :message="message" />
+        </q-chat-message>
       </template>
     </div>
 
@@ -26,6 +30,7 @@ export default {
     ...mapGetters({ get_chatMessages: "storedata/get_chatMessages" }),
   },
   name: "GenAIChatUI",
+  /* eslint-disable */
   components: {
     GenAIChatMessageAI,
     GenAIChatMessageUser,
@@ -36,6 +41,9 @@ export default {
 
 <style>
 @import "src/assets/css/variable.css";
+.q-message {
+  width: 100% !important;
+}
 .chat-ui {
   background: var(--hds-chatbox-background);
   border: var(--hds-sidebar-border);
@@ -51,12 +59,13 @@ export default {
   display: none;
 }
 
-.chat-ui .chat-landing {
+.chat-ui > .chat-landing {
   width: var(--hds-chatbox-width);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--hds-chatbox-padding);
+  padding: 0;
+
   gap: var(--hds-chatbox-gap);
 }
 .chat-container {

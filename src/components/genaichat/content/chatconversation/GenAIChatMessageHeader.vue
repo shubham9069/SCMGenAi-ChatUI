@@ -3,11 +3,16 @@
     <div class="profile-icon" :style="{ padding: profileIconPadding }">
       <span class="material-icons" v-if="type == 'Ai'"> auto_awesome </span>
 
-      <img :src="userDetails?.image" alt="" v-else />
+      <q-avatar v-else size="32px">
+        <img
+          :src="userDetails?.image || 'https://cdn.quasar.dev/img/avatar.png'"
+          alt=""
+        />
+      </q-avatar>
     </div>
     <div class="ai-profile-head">
       <div class="profile-info">
-        <span class="user-name">{{ userName }}</span>
+        <span class="user-name">{{ userName || "shubham " }}</span>
 
         <span class="chat-date">{{ moment(message?.date).fromNow() }}</span>
       </div>
@@ -21,21 +26,24 @@
       keyboard_arrow_down
     </span>
 
-    <div class="three-dot">
-      <span
-        class="material-icons iconSize"
-        :style="{ color: 'grey' }"
-        @click="dropDownToggleFunc"
-      >
-        more_horiz
-      </span>
-
+    <q-btn-dropdown
+      dropdown-icon="more_horiz"
+      unelevated
+      dense
+      text-color="grey"
+    >
       <!-- // dropdown component -->
       <GenAIChatDropDown
         :dropDownToggle="dropDownToggle"
         :dropDownList="['OperationX', 'OperationY']"
       />
-    </div>
+      <!-- <span
+        class="material-icons iconSize"
+        :style="{ color: 'grey' }"
+      >
+        more_horiz
+      </span> -->
+    </q-btn-dropdown>
   </div>
   <q-separator />
 </template>
@@ -121,6 +129,9 @@ export default {
   border-radius: var(--hds-chatbox-chat-profile-border-radius);
   overflow: hidden;
   background: var(--hds-chatbox-chat-profile-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chat-profile-info .profile-info {
@@ -139,10 +150,6 @@ export default {
   color: var(--hds-chatbox-chat-profile-date-font-color);
   font-size: var(--hds-chatbox-chat-profile-date-font-size);
   font-weight: var(--hds-chatbox-chat-profile-date-font-weight);
-}
-.profile-icon > img {
-  object-fit: cover;
-  width: 100%;
 }
 
 .three-dot {

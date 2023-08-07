@@ -86,7 +86,7 @@ export default {
   width: var(--hds-chatbox-warpper-input-width);
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
   gap: var(--hds-chatbox-warpper-input-gap);
 }
 

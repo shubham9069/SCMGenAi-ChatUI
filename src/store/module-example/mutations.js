@@ -1,5 +1,5 @@
 export default {
-  SelectedLabelFunc: (state, label) => {
+  selectedLabelFunc: (state, label) => {
     if (label == state.selectedLabel) {
       state.isVisible = !state.isVisible;
     } else {
@@ -80,17 +80,6 @@ export default {
       },
       id: state.chatMessages?.length + 1,
     });
-
-    // scroll to bottom function
-    //  when new msg are added into the chatMEssage Array so it will take few millisecound to update Dom so according to updated dom they will now look updated height of chat-container then scroll bottom
-
-    setTimeout(function () {
-      const chatContainer = document.getElementById("chatui-container");
-
-      if (chatContainer) {
-        chatContainer.scrollTop = chatContainer?.scrollHeight;
-      }
-    }, 50);
   },
   gotoLandingPage: (state) => {
     state.chatMessages = [];

@@ -1,7 +1,7 @@
 <template>
   <GenAIChatHeader :chatBoxHeader="chatBoxHeader" />
   <div class="chat-landing">
-    <h5>{{ Content }}</h5>
+    <h5>{{ content }}</h5>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
       type: Object,
       required: true,
     },
-    Content: {
+    content: {
       type: String,
       required: true,
     },

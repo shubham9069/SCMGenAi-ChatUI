@@ -1,6 +1,6 @@
 <template>
   <q-separator />
-  <div class="chat-Footer">
+  <div class="chat-footer">
     <!-- collapse menu -->
     <span
       v-for="image in iconArr"
@@ -25,13 +25,13 @@ export default {
 
 <style>
 @import "src/assets/css/variable.css";
-.chat-Footer {
+.chat-footer {
   display: flex;
   align-items: center;
   padding: 8px 16px;
   grid-gap: 20px;
 }
-.chat-Footer > span {
+.chat-footer > span {
   font-size: 17px;
   cursor: pointer;
 }

@@ -1,9 +1,16 @@
 <template>
-  <ul class="dropdown-menu chat-dropdown" :style="toggle">
-    <li v-for="element in dropDownList" :key="element">
-      <p>{{ element }}</p>
-    </li>
-  </ul>
+  <q-list>
+    <q-item
+      clickable
+      v-close-popup
+      v-for="element in dropDownList"
+      :key="element"
+    >
+      <q-item-section>
+        <q-item-label>{{ element }}</q-item-label>
+      </q-item-section>
+    </q-item>
+  </q-list>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 export default {
-  SelectedLabelFunc: ({ dispatch, commit }, params) => {
-    commit("SelectedLabelFunc", params);
+  selectedLabelFunc: ({ dispatch, commit }, params) => {
+    commit("selectedLabelFunc", params);
   },
   closeSideBar: ({ dispatch, commit }) => {
     commit("closeSideBar");

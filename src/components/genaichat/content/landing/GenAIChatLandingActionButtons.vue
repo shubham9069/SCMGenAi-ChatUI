@@ -58,7 +58,7 @@ export default {
             iconBackgroundColor: "#E6F3F1",
             color: "#389D91",
             title: "General Insights Questions",
-            clickFun: this.AnalyticsReport,
+            clickFun: this.AnalyticsReportMutation,
           },
           {
             icon: "search",
@@ -77,7 +77,7 @@ export default {
     };
   },
   methods: {
-    AnalyticsReport() {
+    AnalyticsReportMutation() {
       return this.$store.dispatch(
         "storedata/sentAnalytics",
         "chart represtation "
