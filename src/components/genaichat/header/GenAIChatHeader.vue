@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <span class="material-icons iconSize" @click="closeSidebarMutation">
+    <span class="material-icons icon-size" @click="closeSidebarMutation">
       close
     </span>
     <p style="flex: 1" @click="gotoLandingPageMutation">
@@ -55,9 +55,7 @@ export default {
   grid-gap: 20px;
   border: var(--hds-sidebar-border);
 }
-.header svg {
-  cursor: pointer;
-}
+
 .header p {
   font-size: 18px;
   margin: 0;

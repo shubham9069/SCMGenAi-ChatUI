@@ -10,14 +10,14 @@
         class="skill-card"
         v-for="skill in popularDataSkill.dataSkills"
         :key="skill?.title"
-        @click="skill?.clickFun"
+        @click="skill?.clickFunc"
       >
         <div
           class="skill-icon"
           :style="{ background: skill?.iconBackgroundColor }"
         >
           <span
-            class="material-icons iconSize"
+            class="material-icons icon-size"
             :style="{ color: `${skill?.color}` }"
           >
             {{ skill?.icon }}
@@ -27,7 +27,7 @@
           <span>{{ skill?.title }}</span>
           <div class="route-icon">
             <span
-              class="material-icons iconSize"
+              class="material-icons icon-size"
               :style="{
                 color: '#25282E',
               }"
@@ -58,7 +58,7 @@ export default {
             iconBackgroundColor: "#E6F3F1",
             color: "#389D91",
             title: "General Insights Questions",
-            clickFun: this.AnalyticsReportMutation,
+            clickFunc: this.analyticsReportMutation,
           },
           {
             icon: "search",
@@ -77,7 +77,7 @@ export default {
     };
   },
   methods: {
-    AnalyticsReportMutation() {
+    analyticsReportMutation() {
       return this.$store.dispatch(
         "storedata/sentAnalytics",
         "chart represtation "

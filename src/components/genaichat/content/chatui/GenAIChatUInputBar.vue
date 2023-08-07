@@ -9,7 +9,7 @@
         <span class="mdi mdi-progress-close"></span>
       </div>
       <q-input
-        @keyup.enter="sentMsg"
+        @keyup.enter="sentMessage"
         v-model="inputText"
         :placeholder="inputBoxPlaceholder"
         type="text"
@@ -26,7 +26,7 @@
       <div class="chat-icon" @click="speedReconization" v-else>
         <q-spinner-audio color="grey" />
       </div>
-      <div class="chat-icon" @click="sentMsg">
+      <div class="chat-icon" @click="sentMessage">
         <span class="mdi mdi-send-circle"></span>
       </div>
     </div>
@@ -63,7 +63,7 @@ export default {
     handleFile(event) {
       this.messageFile = event.target.files;
     },
-    sentMsg() {
+    sentMessage() {
       if (!this.inputText) return;
       this.$store.dispatch("storedata/sentMessage", this.inputText);
       this.inputText = "";
@@ -74,11 +74,11 @@ export default {
       recognization.onresult = (e) => {
         var transcript = e.results[0][0].transcript;
         this.inputText += " " + transcript;
-        console.log(e);
+
         //  output.classList.remove("hide")
         //  action.innerHTML = "";
       };
-
+      recognization.start();
       recognization.onstart = () => {
         this.mic = false;
       };
@@ -86,7 +86,6 @@ export default {
         recognization.stop();
         this.mic = true;
       };
-      recognization.start();
     },
   },
 };

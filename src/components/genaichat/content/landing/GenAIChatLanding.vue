@@ -1,7 +1,7 @@
 <template>
   <div class="chat-landing">
     <div class="chat-landing-header">
-      <span class="material-icons iconSize" :style="get_gradientIcon">
+      <span class="material-icons icon-size" :style="get_gradientIcon">
         auto_awesome
       </span>
       <p>{{ emptyChatContent?.title }}</p>
@@ -9,7 +9,7 @@
 
     <div className="chat-landing-input">
       <q-input
-        @keyup.enter="sentMsg"
+        @keyup.enter="sentMessage"
         v-model="inputText"
         :placeholder="emptyChatContent?.inputPlaceholder"
         type="text"
@@ -18,9 +18,9 @@
         borderless
       />
 
-      <div @click="sentMsg">
+      <div @click="sentMessage">
         <span
-          class="material-icons iconSize"
+          class="material-icons icon-size"
           :style="{
             color: 'white',
           }"
@@ -32,10 +32,10 @@
 
     <GenAIChatLandingActionButtons />
 
-    <div className="chat-landing-Suggestion">
+    <div className="chat-landing-suggestion">
       <span>
         <span
-          class="material-icons iconSize"
+          class="material-icons icon-size"
           :style="{
             color: '#06025c',
           }"
@@ -86,7 +86,7 @@ export default {
   },
 
   methods: {
-    sentMsg() {
+    sentMessage() {
       if (!this.inputText) return;
       this.$store.dispatch("storedata/sentMessage", this.inputText);
       this.inputText = "";
@@ -148,7 +148,7 @@ export default {
   width: 100%;
   flex-wrap: wrap;
 }
-.chat-landing-Suggestion > span {
+.chat-landing-suggestion > span {
   display: flex;
   align-items: center;
   font-weight: var(--hds-chatbox-saved-template-head-font-weight);

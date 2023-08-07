@@ -37,12 +37,6 @@
         :dropDownToggle="dropDownToggle"
         :dropDownList="['OperationX', 'OperationY']"
       />
-      <!-- <span
-        class="material-icons iconSize"
-        :style="{ color: 'grey' }"
-      >
-        more_horiz
-      </span> -->
     </q-btn-dropdown>
   </div>
   <q-separator />
@@ -150,11 +144,5 @@ export default {
   color: var(--hds-chatbox-chat-profile-date-font-color);
   font-size: var(--hds-chatbox-chat-profile-date-font-size);
   font-weight: var(--hds-chatbox-chat-profile-date-font-weight);
-}
-
-.three-dot {
-  position: relative;
-  cursor: pointer;
-  display: flex;
 }
 </style>

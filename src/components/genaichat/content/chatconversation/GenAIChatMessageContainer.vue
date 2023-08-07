@@ -1,6 +1,6 @@
 <template>
-  <div
-    class="message"
+  <q-chat-message
+    bg-color="transparent"
     v-if="
       message.isAI &&
       $store.state.storedata.isLoading &&
@@ -8,19 +8,23 @@
     "
   >
     <q-spinner-dots color="black" size="2em" />
-  </div>
+  </q-chat-message>
 
-  <div
-    class="message"
+  <q-chat-message
+    bg-color="transparent"
     :id="message?.id"
     v-else-if="message?.chart"
     :style="{ maxWidth: '500px' }"
   >
     <GenAIChatBarChart :graphArr="message?.chartInfo?.chartArr" />
-  </div>
-  <div class="message" :id="message?.id" v-else>
-    {{ message?.text }}
-  </div>
+  </q-chat-message>
+  <q-chat-message
+    :id="message?.id"
+    bg-color="transparent"
+    v-else
+    :text="[message?.text]"
+  >
+  </q-chat-message>
 </template>
 
 <script>
@@ -42,13 +46,11 @@ export default {
 
 <style>
 @import "src/assets/css/variable.css";
-.message {
-  color: var(--hds-chatbox-warpper-message-color);
-  font-style: normal;
-  font-weight: var(--hds-chatbox-warpper-message-font-weight);
-  font-size: var(--hds-chatbox-warpper-message-font-size);
-  max-width: 100%;
-  white-space: pre-line;
-  padding: 16px;
+.q-message {
+  width: 100% !important;
+  margin: 8px;
+}
+.q-message .q-message-text:last-child {
+  min-height: 0 !important;
 }
 </style>

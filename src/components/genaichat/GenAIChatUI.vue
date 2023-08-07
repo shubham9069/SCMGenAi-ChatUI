@@ -3,14 +3,12 @@
     <div class="chat-container chat-landing" id="chatui-container">
       <template v-for="(message, index) in get_chatMessages" :key="index">
         <!-- wrapper Ai component  -->
-        <q-chat-message v-if="message?.isAI" bg-color="transparent" size="12">
-          <GenAIChatMessageAI :message="message" />
-        </q-chat-message>
+
+        <GenAIChatMessageAI :message="message" v-if="message.isAI" />
 
         <!-- wrapper User Component  -->
-        <q-chat-message v-else bg-color="transparent" size="12">
-          <GenAIChatMessageUser :message="message" />
-        </q-chat-message>
+
+        <GenAIChatMessageUser :message="message" v-else />
       </template>
     </div>
 
@@ -41,9 +39,7 @@ export default {
 
 <style>
 @import "src/assets/css/variable.css";
-.q-message {
-  width: 100% !important;
-}
+
 .chat-ui {
   background: var(--hds-chatbox-background);
   border: var(--hds-sidebar-border);
@@ -64,7 +60,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0;
+  padding: 8px;
 
   gap: var(--hds-chatbox-gap);
 }

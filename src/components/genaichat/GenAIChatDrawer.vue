@@ -12,7 +12,7 @@
       </div>
     </section>
 
-    <!-- right toolkox bar  -->
+    <!-- right toolbar  -->
     <div class="toolbar">
       <template v-for="section in toolkitItems" :key="section.section">
         <template v-if="section.section == 'Section 1'">
@@ -177,7 +177,7 @@ export default {
 </script>
 
 <style>
-.iconSize {
+.icon-size {
   font-size: 20px;
   cursor: pointer;
 }
