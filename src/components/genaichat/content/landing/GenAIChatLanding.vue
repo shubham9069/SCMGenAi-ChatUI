@@ -8,12 +8,16 @@
     </div>
 
     <div className="chat-landing-input">
-      <input
-        id="search-Box"
-        type="text"
-        :placeholder="emptyChatContent?.inputPlaceholder"
+      <q-input
         @keyup.enter="sentMsg"
+        v-model="inputText"
+        :placeholder="emptyChatContent?.inputPlaceholder"
+        type="text"
+        dense
+        unelevated
+        borderless
       />
+
       <div @click="sentMsg">
         <span
           class="material-icons iconSize"
@@ -65,6 +69,11 @@ export default {
     GenAIChatLandingActionButtons,
     GenAIPromptSuggestion,
   },
+  data() {
+    return {
+      inputText: "",
+    };
+  },
   props: {
     emptyChatContent: {
       type: Object,
@@ -78,10 +87,9 @@ export default {
 
   methods: {
     sentMsg() {
-      var element = document?.getElementById("search-Box");
-      if (!element.value) return;
-      this.$store.dispatch("storedata/sentMessage", element.value);
-      element.value = "";
+      if (!this.inputText) return;
+      this.$store.dispatch("storedata/sentMessage", this.inputText);
+      this.inputText = "";
     },
     sentMessageMutaion(title) {
       return this.$store.dispatch("storedata/sentMessage", title);
@@ -115,7 +123,7 @@ export default {
   padding: var(--hds-chatbox-header-paddingY);
 }
 
-.chat-landing-input input {
+.chat-landing-input > .q-field {
   width: var(--hds-chatbox-input-width);
   height: var(--hds-chatbox-input-height);
   border: var(--hds-chatbox-input-border);

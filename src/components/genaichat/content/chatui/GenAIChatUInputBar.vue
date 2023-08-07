@@ -8,17 +8,23 @@
       <div class="chat-icon" @click="deselectMedia" v-else>
         <span class="mdi mdi-progress-close"></span>
       </div>
-      <input
-        type="text"
-        name="query"
-        id="messageBox"
-        :placeholder="inputBoxPlaceholder"
-        class="chat-textbox"
+      <q-input
         @keyup.enter="sentMsg"
-        autocomplete="off"
+        v-model="inputText"
+        :placeholder="inputBoxPlaceholder"
+        type="text"
+        :value="inputText"
+        name="query"
+        dense
+        unelevated
+        borderless
       />
-      <div class="chat-icon">
+
+      <div class="chat-icon" @click="speedReconization" v-if="mic">
         <span class="mdi mdi-microphone"></span>
+      </div>
+      <div class="chat-icon" @click="speedReconization" v-else>
+        <q-spinner-audio color="grey" />
       </div>
       <div class="chat-icon" @click="sentMsg">
         <span class="mdi mdi-send-circle"></span>
@@ -42,6 +48,8 @@ export default {
   data() {
     return {
       messageFile: "",
+      inputText: "",
+      mic: true,
     };
   },
   methods: {
@@ -56,10 +64,29 @@ export default {
       this.messageFile = event.target.files;
     },
     sentMsg() {
-      var element = document.getElementById("messageBox");
-      if (!element.value) return;
-      this.$store.dispatch("storedata/sentMessage", element.value);
-      element.value = "";
+      if (!this.inputText) return;
+      this.$store.dispatch("storedata/sentMessage", this.inputText);
+      this.inputText = "";
+    },
+    speedReconization() {
+      let recognization = new webkitSpeechRecognition();
+
+      recognization.onresult = (e) => {
+        var transcript = e.results[0][0].transcript;
+        this.inputText += " " + transcript;
+        console.log(e);
+        //  output.classList.remove("hide")
+        //  action.innerHTML = "";
+      };
+
+      recognization.onstart = () => {
+        this.mic = false;
+      };
+      recognization.onspeechend = () => {
+        recognization.stop();
+        this.mic = true;
+      };
+      recognization.start();
     },
   },
 };
