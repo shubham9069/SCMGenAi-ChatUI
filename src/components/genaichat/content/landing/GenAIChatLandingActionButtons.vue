@@ -1,7 +1,7 @@
 <template>
   <div class="action-button-container">
     <div class="action-button-head">
-      <img :src="popularDataSkill.icon" alt="" />
+      <q-icon class="material-icons icon-size"> bolt </q-icon>
       <span>{{ popularDataSkill.title }}</span>
     </div>
 
@@ -16,24 +16,24 @@
           class="skill-icon"
           :style="{ background: skill?.iconBackgroundColor }"
         >
-          <span
+          <q-icon
             class="material-icons icon-size"
             :style="{ color: `${skill?.color}` }"
           >
             {{ skill?.icon }}
-          </span>
+          </q-icon>
         </div>
         <div class="skill-info">
           <span>{{ skill?.title }}</span>
           <div class="route-icon">
-            <span
+            <q-icon
               class="material-icons icon-size"
               :style="{
                 color: '#25282E',
               }"
             >
               chevron_right
-            </span>
+            </q-icon>
           </div>
         </div>
       </div>

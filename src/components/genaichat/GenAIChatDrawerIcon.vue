@@ -3,12 +3,12 @@
     class="chatdrawer-icon"
     :style="{ background: gradientColor(item?.label) }"
   >
-    <span
-      class="material-icons"
+    <q-icon
+      class="material-icons drawer-icon"
       :style="{ color: iconColor(item?.label, item?.color) }"
     >
       {{ item?.icon }}
-    </span>
+    </q-icon>
   </div>
 </template>
 
@@ -52,7 +52,7 @@ export default {
   align-items: center;
   cursor: pointer;
 }
-.chat-drawer .chatdrawer-icon > span {
+.chat-drawer .chatdrawer-icon > .drawer-icon {
   font-size: 24px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="header">
-    <span class="material-icons icon-size" @click="closeSidebarMutation">
+    <q-icon class="material-icons icon-size" @click="closeSidebarMutation">
       close
-    </span>
+    </q-icon>
     <p style="flex: 1" @click="gotoLandingPageMutation">
       {{ chatBoxHeader?.title }}
     </p>

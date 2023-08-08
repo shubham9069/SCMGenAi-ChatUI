@@ -1,9 +1,17 @@
 <template>
   <div class="chat-landing">
     <div class="chat-landing-header">
-      <span class="material-icons icon-size" :style="get_gradientIcon">
-        auto_awesome
-      </span>
+      <div class="icon-star-container">
+        <span
+          class="mdi mdi-star-four-points-outline"
+          :style="{ ...get_gradientIcon, fontSize: '22px' }"
+        ></span>
+        <span
+          class="mdi mdi-star-four-points-outline"
+          :style="{ ...get_gradientIcon, fontSize: '12px' }"
+        ></span>
+      </div>
+
       <p>{{ emptyChatContent?.title }}</p>
     </div>
 
@@ -19,14 +27,14 @@
       />
 
       <div @click="sentMessage">
-        <span
+        <q-icon
           class="material-icons icon-size"
           :style="{
             color: 'white',
           }"
         >
           search
-        </span>
+        </q-icon>
       </div>
     </div>
 
@@ -34,14 +42,14 @@
 
     <div className="chat-landing-suggestion">
       <span>
-        <span
+        <q-icon
           class="material-icons icon-size"
           :style="{
             color: '#06025c',
           }"
         >
           search
-        </span>
+        </q-icon>
         {{ savedTemplates?.title }}</span
       >
       <!-- suggestion component  -->
@@ -108,9 +116,11 @@ export default {
   grid-gap: var(--hds-chatbox-header-gap);
   padding: var(--hds-chatbox-header-paddingY);
 }
-.chat-landing-header > img {
-  width: var(--hds-chatbox-header-logo-width);
-  height: var(--hds-chatbox-header-logo-height);
+.chat-landing-header > .icon-star-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: -1px;
 }
 .chat-landing-header > p {
   margin: 0;

@@ -1,7 +1,7 @@
 <template>
   <div class="chat-profile-info">
     <div class="profile-icon" :style="{ padding: profileIconPadding }">
-      <span class="material-icons" v-if="type == 'Ai'"> auto_awesome </span>
+      <q-icon class="material-icons" v-if="type == 'Ai'"> auto_awesome </q-icon>
 
       <q-avatar v-else size="32px">
         <img
@@ -18,13 +18,13 @@
       </div>
     </div>
     <!-- collapse menu -->
-    <span
+    <q-icon
       class="material-icons iconSize"
       :style="collapse"
       @click="$emit('collapseMessageContainer')"
     >
       keyboard_arrow_down
-    </span>
+    </q-icon>
 
     <q-btn-dropdown
       dropdown-icon="more_horiz"
