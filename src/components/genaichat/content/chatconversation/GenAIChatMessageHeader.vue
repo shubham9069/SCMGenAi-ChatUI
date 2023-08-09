@@ -11,7 +11,7 @@
       <div class="profile-info">
         <span class="user-name">{{ userName }}</span>
 
-        <span class="chat-date">{{ moment(message?.date).fromNow() }}</span>
+        <span class="chat-date">{{ moment(message?.date) }}</span>
       </div>
     </div>
     <!-- collapse menu -->
@@ -70,8 +70,8 @@ export default {
     };
   },
   methods: {
-    moment: function () {
-      return moment();
+    moment: function (date) {
+      return moment(date).fromNow();
     },
     dropDownToggleFunc() {
       return (this.dropDownToggle = !this.dropDownToggle);

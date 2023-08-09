@@ -1,17 +1,22 @@
 <template>
   <div
+    v-if="type == 'material-icons'"
     class="chatdrawer-icon"
     :style="{ background: gradientColor(item?.label) }"
   >
     <q-icon
-      v-if="type == 'material-icons'"
       class="material-icons drawer-icon"
       :style="{ color: iconColor(item?.label, item?.color) }"
     >
       {{ item?.icon }}
     </q-icon>
+  </div>
+  <div
+    v-else
+    class="chatdrawer-icon"
+    :style="{ background: gradientColor(item?.label) }"
+  >
     <q-icon
-      v-else
       :class="`mdi ${item?.icon} drawer-icon`"
       :style="{ color: iconColor(item?.label, item?.color) }"
     >
@@ -26,6 +31,7 @@ export default {
     ...mapGetters({
       get_isVisible: "storedata/get_isVisible",
       get_selectedLabel: "storedata/get_selectedLabel",
+      get_expandScreen: "storedata/get_expandScreen",
     }),
   },
   name: "GenAIChatDrawerIcon",
@@ -42,14 +48,24 @@ export default {
   },
   methods: {
     gradientColor(label) {
-      return this.get_isVisible && label == this.get_selectedLabel
-        ? "linear-gradient(135deg, #0074E8 0%, #A933FB 100%)"
-        : "transparent";
+      if (this.type == "material-icons") {
+        return this.get_isVisible && label == this.get_selectedLabel
+          ? "linear-gradient(135deg, #0074E8 0%, #A933FB 100%)"
+          : "transparent";
+      } else {
+        return this.get_isVisible && this.get_expandScreen
+          ? "linear-gradient(135deg, #0074E8 0%, #A933FB 100%)"
+          : "transparent";
+      }
     },
     iconColor(label, color) {
-      return this.get_isVisible && label == this.get_selectedLabel
-        ? "white"
-        : color;
+      if (this.type == "material-icons") {
+        return this.get_isVisible && label == this.get_selectedLabel
+          ? "white"
+          : color;
+      } else {
+        return this.get_isVisible && this.get_expandScreen ? "white" : color;
+      }
     },
   },
 };

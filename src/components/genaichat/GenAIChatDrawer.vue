@@ -3,12 +3,15 @@
     <!-- left sidebox  -->
     <section class="sidebox" :style="{ display: getVisible }">
       <div class="bottom">
-        <GenAIChatPage v-bind="chatProps" v-if="get_selectedLabel == 'Ai'" />
-
-        <GenAIChatRecent
-          v-bind="recentProps"
-          v-if="get_selectedLabel == 'Recent'"
-        />
+        <keep-alive>
+          <GenAIChatPage v-bind="chatProps" v-if="get_selectedLabel == 'Ai'" />
+        </keep-alive>
+        <keep-alive>
+          <GenAIChatRecent
+            v-bind="recentProps"
+            v-if="get_selectedLabel == 'Recent'"
+          />
+        </keep-alive>
       </div>
     </section>
 

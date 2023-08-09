@@ -6,7 +6,6 @@
     :emptyChatContent="emptyChatContent"
     :savedTemplates="savedTemplates"
   />
-
   <GenAIChatUI v-else />
 </template>
 

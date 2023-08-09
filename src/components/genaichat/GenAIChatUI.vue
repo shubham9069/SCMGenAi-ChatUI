@@ -34,6 +34,15 @@ export default {
     GenAIChatMessageUser,
     GenAIChatUInputBar,
   },
+  activated() {
+    setTimeout(() => {
+      const chatContainer = document.getElementById("chatui-container");
+
+      if (chatContainer) {
+        chatContainer.scrollTop = chatContainer?.scrollHeight;
+      }
+    }, 50);
+  },
 };
 </script>
 
