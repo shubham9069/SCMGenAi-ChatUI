@@ -1,9 +1,10 @@
 <template>
   <div class="chat-form">
     <div class="chat-input-group">
-      <div class="chat-icon" @click="selectMedia" v-if="!messageFile">
-        <input type="file" id="messageFile" hidden @change="handleFile" />
-        <q-icon class="mdi mdi-paperclip"></q-icon>
+      <div class="chat-icon" v-if="!messageFile">
+        <q-file v-model="messageFile" dense borderless color="grey">
+          <q-icon class="mdi mdi-paperclip"></q-icon>
+        </q-file>
       </div>
       <div class="chat-icon" @click="deselectMedia" v-else>
         <q-icon class="mdi mdi-progress-close"></q-icon>
@@ -53,15 +54,8 @@ export default {
     };
   },
   methods: {
-    selectMedia() {
-      var element = document.getElementById("messageFile");
-      element.click();
-    },
     deselectMedia() {
       this.messageFile = "";
-    },
-    handleFile(event) {
-      this.messageFile = event.target.files;
     },
     sentMessage() {
       if (!this.inputText) return;
@@ -118,6 +112,10 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+.chat-form .chat-input-group .mdi-paperclip {
+  margin-right: 8px;
+  align-self: center;
 }
 
 .chat-form .chat-input-group .chat-icon {
