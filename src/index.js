@@ -1,4 +1,4 @@
-import SCMGenAIChatApp from "./App.vue";
-import storedata from "./store/scmgenaistore/index";
+import SCMGenAIChatApp from "src/App.vue";
+import storedata from "src/store/scmgenaistore/index";
 
 export { SCMGenAIChatApp, storedata };
