@@ -4,10 +4,17 @@
     :style="{ background: gradientColor(item?.label) }"
   >
     <q-icon
+      v-if="type == 'material-icons'"
       class="material-icons drawer-icon"
       :style="{ color: iconColor(item?.label, item?.color) }"
     >
       {{ item?.icon }}
+    </q-icon>
+    <q-icon
+      v-else
+      :class="`mdi ${item?.icon} drawer-icon`"
+      :style="{ color: iconColor(item?.label, item?.color) }"
+    >
     </q-icon>
   </div>
 </template>
@@ -26,6 +33,11 @@ export default {
     item: {
       type: Object,
       required: true,
+    },
+    type: {
+      type: String,
+      required: false,
+      default: "material-icons",
     },
   },
   methods: {

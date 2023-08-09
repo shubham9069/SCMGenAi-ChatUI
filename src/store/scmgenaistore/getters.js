@@ -8,11 +8,13 @@ export default {
   get_chatMessages: (state) => {
     return state.chatMessages;
   },
-  get_gradientIcon: (state) => {
-    return {
-      background: "linear-gradient(135deg, #0074E8 0%, #A933FB 100%)",
-      webkitBackgroundClip: "text",
-      webkitTextFillColor: "transparent",
-    };
+  get_isLoading: (state) => {
+    return state.isLoading;
+  },
+  get_landingToggle: (state) => {
+    return state.landingToggle;
+  },
+  get_expandScreen: (state) => {
+    return state.expandScreen;
   },
 };

@@ -9,9 +9,9 @@
       />
 
       <div v-if="collapseChat">
-        <GenAIChatMessageContainer :message="message" />
+        <GenAIChatMessageContainer :message="message" type="Ai" />
       </div>
-      <GenAIChatMessageFooter :iconArr="iconArr" />
+      <GenAIChatMessageFooter :iconArr="iconArr" v-if="collapseChat" />
     </div>
     <div class="suggestion-box">
       <!-- suggestion component -->

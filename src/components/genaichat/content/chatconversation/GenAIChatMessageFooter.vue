@@ -2,12 +2,12 @@
   <q-separator />
   <div class="chat-footer">
     <!-- collapse menu -->
-    <span
+    <q-icon
       v-for="image in iconArr"
       :key="image.name"
       :class="`mdi ${image.src}`"
       :style="{ color: `${image.color}` }"
-    ></span>
+    ></q-icon>
   </div>
 </template>
 

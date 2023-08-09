@@ -4,5 +4,7 @@ export default function () {
     isVisible: false,
     chatMessages: [],
     isLoading: false,
+    landingToggle: true,
+    expandScreen: false,
   };
 }

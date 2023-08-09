@@ -2,9 +2,7 @@
   <q-chat-message
     bg-color="transparent"
     v-if="
-      message.isAI &&
-      $store.state.storedata.isLoading &&
-      message.id == $store.state.storedata.chatMessages.length - 1
+      message.isAI && get_isLoading && message.id == get_chatMessages.length - 1
     "
   >
     <q-spinner-dots color="black" size="2em" />
@@ -23,14 +21,22 @@
     bg-color="transparent"
     v-else
     :text="[message?.text]"
+    :sent="type == 'User'"
   >
   </q-chat-message>
 </template>
 
 <script>
 import GenAIChatBarChart from "src/components/genaichat/charts/apex/GenAIChatBarChart.vue";
+import { mapGetters } from "vuex";
 
 export default {
+  computed: {
+    ...mapGetters({
+      get_chatMessages: "storedata/get_chatMessages",
+      get_isLoading: "storedata/get_isLoading",
+    }),
+  },
   name: "GenAIChatMessageContainer",
   components: {
     GenAIChatBarChart,
@@ -38,6 +44,10 @@ export default {
   props: {
     message: {
       type: Object,
+      required: true,
+    },
+    type: {
+      type: String,
       required: true,
     },
   },
@@ -48,7 +58,7 @@ export default {
 @import "src/assets/css/variable.css";
 .q-message {
   width: 100% !important;
-  margin: 8px;
+  margin: 8px 0;
 }
 .q-message .q-message-text:last-child {
   min-height: 0 !important;

@@ -2,14 +2,14 @@
   <div class="chat-landing">
     <div class="chat-landing-header">
       <div class="icon-star-container">
-        <span
+        <q-icon
           class="mdi mdi-star-four-points-outline"
           :style="{ ...get_gradientIcon, fontSize: '22px' }"
-        ></span>
-        <span
+        ></q-icon>
+        <q-icon
           class="mdi mdi-star-four-points-outline"
           :style="{ ...get_gradientIcon, fontSize: '12px' }"
-        ></span>
+        ></q-icon>
       </div>
 
       <p>{{ emptyChatContent?.title }}</p>
@@ -69,9 +69,6 @@ import GenAIChatLandingActionButtons from "src/components/genaichat/content/land
 import { mapGetters } from "vuex";
 
 export default {
-  computed: {
-    ...mapGetters({ get_gradientIcon: "storedata/get_gradientIcon" }),
-  },
   name: "GenAIChatLanding",
   components: {
     GenAIChatLandingActionButtons,
@@ -101,6 +98,15 @@ export default {
     },
     sentMessageMutaion(title) {
       return this.$store.dispatch("storedata/sentMessage", title);
+    },
+  },
+  computed: {
+    get_gradientIcon() {
+      return {
+        background: "linear-gradient(135deg, #0074E8 0%, #A933FB 100%)",
+        webkitBackgroundClip: "text",
+        webkitTextFillColor: "transparent",
+      };
     },
   },
 };

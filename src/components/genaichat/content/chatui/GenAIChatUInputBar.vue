@@ -3,10 +3,10 @@
     <div class="chat-input-group">
       <div class="chat-icon" @click="selectMedia" v-if="!messageFile">
         <input type="file" id="messageFile" hidden @change="handleFile" />
-        <span class="mdi mdi-paperclip"></span>
+        <q-icon class="mdi mdi-paperclip"></q-icon>
       </div>
       <div class="chat-icon" @click="deselectMedia" v-else>
-        <span class="mdi mdi-progress-close"></span>
+        <q-icon class="mdi mdi-progress-close"></q-icon>
       </div>
       <q-input
         @keyup.enter="sentMessage"
@@ -21,13 +21,13 @@
       />
 
       <div class="chat-icon" @click="speedReconization" v-if="mic">
-        <span class="mdi mdi-microphone"></span>
+        <q-icon class="mdi mdi-microphone"></q-icon>
       </div>
       <div class="chat-icon" @click="speedReconization" v-else>
         <q-spinner-audio color="grey" />
       </div>
       <div class="chat-icon" @click="sentMessage">
-        <span class="mdi mdi-send-circle"></span>
+        <q-icon class="mdi mdi-send-circle"></q-icon>
       </div>
     </div>
   </div>
@@ -96,9 +96,6 @@ export default {
 .chat-form {
   width: var(--hds-chatbox-form-width);
   height: var(--hds-chatbox-form-height);
-  background: var(--hds-chatbox-form-background);
-  border: var(--hds-chatbox-form-border);
-  border-radius: var(--hds-chatbox-form-border-radius);
   padding: var(--hds-chatbox-form-padding);
 }
 
@@ -107,9 +104,11 @@ export default {
   display: grid;
   grid-template-columns: var(--hds-chatbox-form-input-grid-template-columns);
   align-items: center;
+  background: white;
   border: var(--hds-chatbox-form-input-border);
-  border-radius: var(--hds-chatbox-form-input-border-radius);
+  border-radius: 18px;
   height: 100%;
+  padding: 0 10px;
 }
 
 .chat-form .chat-input-group .chat-icon,

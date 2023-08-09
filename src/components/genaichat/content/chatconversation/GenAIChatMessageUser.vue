@@ -9,7 +9,7 @@
       />
 
       <div v-if="collapseChat">
-        <GenAIChatMessageContainer :message="message" />
+        <GenAIChatMessageContainer :message="message" type="User" />
       </div>
     </div>
   </div>

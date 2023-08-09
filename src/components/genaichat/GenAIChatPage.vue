@@ -2,7 +2,7 @@
   <GenAIChatHeader :chatBoxHeader="chatBoxHeader" />
 
   <GenAIChatLanding
-    v-if="!get_chatMessages?.length"
+    v-if="get_landingToggle"
     :emptyChatContent="emptyChatContent"
     :savedTemplates="savedTemplates"
   />
@@ -18,7 +18,10 @@ import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters({ get_chatMessages: "storedata/get_chatMessages" }),
+    ...mapGetters({
+      get_chatMessages: "storedata/get_chatMessages",
+      get_landingToggle: "storedata/get_landingToggle",
+    }),
   },
   name: "GenAIChatPage",
   components: {
@@ -67,7 +70,8 @@ export default {
   display: flex;
   flex-direction: column;
 
-  border: var(--hds-sidebar-border);
+  border-right: var(--hds-sidebar-border);
+  border-top: var(--hds-sidebar-border);
   overflow-y: scroll;
 }
 .chat-landing::-webkit-scrollbar {

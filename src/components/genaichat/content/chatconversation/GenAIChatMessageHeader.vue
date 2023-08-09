@@ -4,15 +4,12 @@
       <q-icon class="material-icons" v-if="type == 'Ai'"> auto_awesome </q-icon>
 
       <q-avatar v-else size="32px">
-        <img
-          :src="userDetails?.image || 'https://cdn.quasar.dev/img/avatar.png'"
-          alt=""
-        />
+        <img :src="userDetails?.image" alt="" />
       </q-avatar>
     </div>
     <div class="ai-profile-head">
       <div class="profile-info">
-        <span class="user-name">{{ userName || "shubham " }}</span>
+        <span class="user-name">{{ userName }}</span>
 
         <span class="chat-date">{{ moment(message?.date).fromNow() }}</span>
       </div>

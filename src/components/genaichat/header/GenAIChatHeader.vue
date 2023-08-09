@@ -3,7 +3,7 @@
     <q-icon class="material-icons icon-size" @click="closeSidebarMutation">
       close
     </q-icon>
-    <p style="flex: 1" @click="gotoLandingPageMutation">
+    <p style="flex: 1" @click="landingPageToggle">
       {{ chatBoxHeader?.title }}
     </p>
 
@@ -26,7 +26,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters({ get_landingToggle: "storedata/get_landingToggle" }),
+  },
   name: "GenAiChatHeader",
   props: {
     chatBoxHeader: {
@@ -38,8 +42,8 @@ export default {
     closeSidebarMutation() {
       return this.$store.dispatch("storedata/closeSideBar");
     },
-    gotoLandingPageMutation() {
-      return this.$store.dispatch("storedata/gotoLandingPage");
+    landingPageToggle() {
+      return this.$store.dispatch("storedata/landingPageToggle");
     },
   },
 };

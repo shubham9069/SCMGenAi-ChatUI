@@ -12,22 +12,14 @@ export default {
   },
   sentMessage: (state, inputText) => {
     state.isLoading = true;
+    state.landingToggle = false;
     const obj = {
       isAI: false,
       text: inputText,
-      id: `${state.chatMessages?.length}`,
+      id: state.chatMessages?.length,
       chart: false,
       chartInfo: {},
       isChatActionArea: false,
-      areaActionButtonOption: {
-        title: "Recomandation",
-        height: "100px",
-        width: "300px",
-        primaryButtonText: "Pin to Broad",
-        secondaryButtonText: "Preview",
-        primaryButtonIcon: "./assets/icons/placeholder.svg",
-        secondaryButtonIcon: "./assets/icons/placeholder.svg",
-      },
       isLoading: false,
       date: new Date(),
     };
@@ -51,22 +43,14 @@ export default {
   },
   sentAnalytics: (state, inputText) => {
     state.isLoading = true;
+    state.landingToggle = false;
     const obj = {
       isAI: false,
       text: inputText,
-      id: `${state.chatMessages?.length}`,
+      id: state.chatMessages?.length,
       chart: false,
       chartInfo: {},
       isChatActionArea: false,
-      areaActionButtonOption: {
-        title: "Recomandation",
-        height: "100px",
-        width: "300px",
-        primaryButtonText: "Pin to Broad",
-        secondaryButtonText: "Preview",
-        primaryButtonIcon: "./assets/icons/placeholder.svg",
-        secondaryButtonIcon: "./assets/icons/placeholder.svg",
-      },
       isLoading: false,
       date: new Date(),
     };
@@ -80,10 +64,18 @@ export default {
       },
       id: state.chatMessages?.length + 1,
     });
+    // scroll to bottom function
+    //  when new msg are added into the chatMEssage Array so it will take few millisecound to update Dom so according to updated dom they will now look updated height of chat-container then scroll bottom
+
+    setTimeout(function () {
+      const chatContainer = document.getElementById("chatui-container");
+
+      if (chatContainer) {
+        chatContainer.scrollTop = chatContainer?.scrollHeight;
+      }
+    }, 50);
   },
-  gotoLandingPage: (state) => {
-    state.chatMessages = [];
-  },
+
   chatActionAreaToggle: (state, id) => {
     state.chatMessages = state.chatMessages?.map((msg) => {
       return id == msg?.id
@@ -93,5 +85,11 @@ export default {
   },
   setLoading: (state, value) => {
     state.isLoading = value;
+  },
+  landingPageToggle: (state) => {
+    state.landingToggle = true;
+  },
+  expandScreenToggle: (state) => {
+    state.expandScreen = !state.expandScreen;
   },
 };

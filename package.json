@@ -4,7 +4,6 @@
   "description": "A Quasar Project",
   "main": "dist/lib-143.js",
   "productName": "Quasar App",
-  "author": "shubham kaushik <shubhamkhaushik@gmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",

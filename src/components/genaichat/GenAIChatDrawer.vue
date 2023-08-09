@@ -26,20 +26,31 @@
           <q-separator />
         </template>
 
-        <template v-if="section.section == 'Section 2'">
+        <template v-else-if="section.section == 'Section 2'">
           <GenAIChatDrawerIcon
             v-for="item in section.items"
             :key="item.label"
             :item="item"
+            @click="activeComponent(item.label)"
           />
 
           <q-separator />
         </template>
-        <template v-if="section.section == 'Section 3'">
+        <template v-else-if="section.section == 'Section 3'">
           <GenAIChatDrawerIcon
             v-for="item in section.items"
             :key="item.label"
             :item="item"
+            @click="activeComponent(item.label)"
+          />
+        </template>
+        <template v-else>
+          <GenAIChatDrawerIcon
+            v-for="item in section.items"
+            :key="item.label"
+            :item="item"
+            type="mdi-5"
+            @click="expandDrawer(item.label)"
           />
         </template>
       </template>
@@ -156,12 +167,27 @@ export default {
             },
           ],
         },
+        {
+          section: "Section 4",
+          items: [
+            {
+              label: "expand",
+              routerLink: "",
+              icon: "mdi-arrow-expand",
+              color: "#25282E",
+            },
+          ],
+        },
       ],
     };
   },
   methods: {
     activeComponent(itemLabel) {
       this.$store.dispatch("storedata/selectedLabelFunc", itemLabel);
+    },
+    expandDrawer(itemLabel) {
+      this.$store.dispatch("storedata/selectedLabelFunc", itemLabel);
+      this.$store.dispatch("storedata/expandScreenToggle");
     },
   },
   computed: {
