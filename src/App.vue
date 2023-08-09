@@ -1,10 +1,5 @@
 <template>
-  <q-splitter
-    v-model="splitterModel"
-    style="height: 100vh"
-    :limits="[30, 100]"
-    reverse
-  >
+  <q-splitter v-model="splitterModel" style="height: 100vh" :limits="limit">
     <template v-slot:before>
       <div class="q-pa-md">
         <div class="text-h4 q-mb-md">Before</div>
@@ -29,18 +24,43 @@
 import { SCMGenAIChatApp } from "scm-ui";
 
 import { ref } from "vue";
+import { mapGetters } from "vuex";
 
 /* eslint-disable vue/no-unused-components */
 
 export default {
+  computed: {
+    ...mapGetters({
+      get_expandScreen: "storedata/get_expandScreen",
+      get_isVisible: "storedata/get_isVisible",
+    }),
+  },
   name: "App",
   components: {
     SCMGenAIChatApp,
   },
-  setup() {
+  data() {
     return {
-      splitterModel: ref(30),
+      splitterModel: ref(97),
+      limit: [0, 97],
     };
+  },
+  watch: {
+    get_expandScreen(newval, oldvalue) {
+      if (this.get_isVisible) {
+        this.splitterModel = ref(this.get_expandScreen ? 0 : 97);
+      } else {
+        this.splitterModel = ref(97);
+      }
+    },
+    get_isVisible() {
+      if (this.get_isVisible) {
+        this.limit = [0, 70];
+      } else {
+        this.limit = [0, 97];
+        this.splitterModel = ref(97);
+      }
+    },
   },
 };
 </script>
