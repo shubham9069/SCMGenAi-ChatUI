@@ -11,7 +11,7 @@
       <div class="profile-info">
         <span class="user-name">{{ userName }}</span>
 
-        <span class="chat-date">{{ moment(message?.date) }}</span>
+        <span class="chat-date">{{ messageDate }}</span>
       </div>
     </div>
     <!-- collapse menu -->
@@ -43,6 +43,7 @@
 import GenAIChatDropDown from "src/components/genaichat/content/common/GenAIChatDropDown.vue";
 import moment from "moment";
 import { mapGetters } from "vuex";
+import { setTransitionHooks } from "vue";
 
 export default {
   name: "GenAIChatMessageHeader",
@@ -67,12 +68,14 @@ export default {
   data() {
     return {
       dropDownToggle: false,
+      messageDate: "",
     };
   },
   methods: {
-    moment: function (date) {
+    momentFun(date) {
       return moment(date).fromNow();
     },
+
     dropDownToggleFunc() {
       return (this.dropDownToggle = !this.dropDownToggle);
     },
@@ -93,6 +96,13 @@ export default {
     userName() {
       return this.type == "Ai" ? "Ai Gen" : this.userDetails?.name;
     },
+  },
+  mounted() {
+    var date = document.getElementById("header-date");
+    this.messageDate = this.momentFun(this.message.date);
+    setInterval(() => {
+      this.messageDate = this.momentFun(this.message.date);
+    }, 1000 * 60);
   },
 };
 </script>

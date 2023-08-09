@@ -1,7 +1,7 @@
 {
   "name": "scm-ui",
   "version": "0.0.1",
-  "description": "A Quasar Project",
+  "description": "SCMGenAi",
   "main": "dist/lib-143.js",
   "productName": "Quasar App",
   "private": true,
