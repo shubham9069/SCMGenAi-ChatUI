@@ -48,7 +48,7 @@ export default {
   watch: {
     get_expandScreen(newval, oldvalue) {
       if (this.get_isVisible) {
-        this.splitterModel = ref(this.get_expandScreen ? 0 : 97);
+        this.splitterModel = ref(this.get_expandScreen ? 0 : 70);
       } else {
         this.splitterModel = ref(97);
       }
