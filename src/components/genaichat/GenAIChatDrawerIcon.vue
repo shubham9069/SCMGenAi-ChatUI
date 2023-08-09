@@ -63,6 +63,7 @@ export default {
         return this.get_isVisible && label == this.get_selectedLabel
           ? "white"
           : color;
+          
       } else {
         return this.get_isVisible && this.get_expandScreen ? "white" : color;
       }

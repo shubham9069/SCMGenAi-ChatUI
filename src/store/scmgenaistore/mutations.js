@@ -2,6 +2,7 @@ export default {
   selectedLabelFunc: (state, label) => {
     if (label == state.selectedLabel) {
       state.isVisible = !state.isVisible;
+      state.expandScreen = false;
     } else {
       state.isVisible = true;
     }
@@ -9,6 +10,7 @@ export default {
   },
   closeSideBar: (state) => {
     state.isVisible = false;
+    state.expandScreen = false;
   },
   sentMessage: (state, inputText) => {
     state.isLoading = true;

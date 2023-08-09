@@ -189,7 +189,9 @@ export default {
       this.$store.dispatch("storedata/selectedLabelFunc", itemLabel);
     },
     expandDrawer() {
-      this.$store.dispatch("storedata/expandScreenToggle");
+      if (this.get_isVisible) {
+        this.$store.dispatch("storedata/expandScreenToggle");
+      }
     },
   },
   computed: {
