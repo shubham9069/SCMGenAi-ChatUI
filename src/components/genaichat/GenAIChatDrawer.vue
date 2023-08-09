@@ -50,7 +50,7 @@
             :key="item.label"
             :item="item"
             type="mdi-5"
-            @click="expandDrawer(item.label)"
+            @click="expandDrawer()"
           />
         </template>
       </template>
@@ -185,8 +185,7 @@ export default {
     activeComponent(itemLabel) {
       this.$store.dispatch("storedata/selectedLabelFunc", itemLabel);
     },
-    expandDrawer(itemLabel) {
-      this.$store.dispatch("storedata/selectedLabelFunc", itemLabel);
+    expandDrawer() {
       this.$store.dispatch("storedata/expandScreenToggle");
     },
   },
