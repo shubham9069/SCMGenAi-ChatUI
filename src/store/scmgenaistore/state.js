@@ -6,5 +6,6 @@ export default function () {
     isLoading: false,
     landingToggle: true,
     expandScreen: false,
+    editorMessage: {},
   };
 }

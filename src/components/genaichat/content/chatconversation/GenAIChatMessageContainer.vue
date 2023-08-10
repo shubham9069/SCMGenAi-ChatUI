@@ -14,7 +14,10 @@
     v-else-if="message?.chart"
     :style="{ maxWidth: '500px' }"
   >
-    <GenAIChatBarChart :graphArr="message?.chartInfo?.chartArr" />
+    <GenAIChatBarChart
+      :graphArr="message?.chartInfo?.chartArr"
+      :chartid="`chart${message?.id}`"
+    />
   </q-chat-message>
   <q-chat-message
     :id="message?.id"

@@ -17,4 +17,7 @@ export default {
   get_expandScreen: (state) => {
     return state.expandScreen;
   },
+  get_editorMessage: (state) => {
+    return state.editorMessage;
+  },
 };

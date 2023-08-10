@@ -80,7 +80,7 @@ export default {
     analyticsReportMutation() {
       return this.$store.dispatch(
         "storedata/sentAnalytics",
-        "chart represtation "
+        "chart reprasentation "
       );
     },
   },

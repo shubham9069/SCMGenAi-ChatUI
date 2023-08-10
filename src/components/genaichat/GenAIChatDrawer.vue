@@ -17,54 +17,79 @@
 
     <!-- right toolbar  -->
     <div class="toolbar">
-      <template v-for="section in toolkitItems" :key="section.section">
-        <template v-if="section.section == 'Section 1'">
-          <GenAIChatDrawerIcon
-            v-for="item in section.items"
-            :key="item.label"
-            :item="item"
-            @click="activeComponent(item.label)"
-          />
+      <GenAIChatDrawerIcon
+        :item="{
+          icon: 'auto_awesome',
+          color: '#25282E',
+          label: 'Ai',
+        }"
+        @click="activeComponent('Ai')"
+      />
+      <GenAIChatDrawerIcon
+        :item="{
+          icon: 'restore',
+          color: '#25282E',
+          label: 'Recent',
+        }"
+        @click="activeComponent('Recent')"
+      />
 
-          <q-separator />
-        </template>
+      <q-separator />
+      <GenAIChatDrawerIcon
+        :item="{
+          icon: 'add',
+          color: '#25282E',
+          label: 'Add',
+        }"
+        @click="activeComponent('Add')"
+      />
+      <GenAIChatDrawerIcon
+        :item="{
+          icon: 'notifications_none',
+          color: '#25282E',
+          label: 'Notification',
+        }"
+        @click="activeComponent('Notification')"
+      />
+      <GenAIChatDrawerIcon
+        :item="{
+          icon: 'settings_suggest',
+          color: '#25282E',
+          label: 'Setting',
+        }"
+        @click="this.editor = true"
+      />
 
-        <template v-else-if="section.section == 'Section 2'">
-          <GenAIChatDrawerIcon
-            v-for="item in section.items"
-            :key="item.label"
-            :item="item"
-            @click="activeComponent(item.label)"
-          />
+      <q-separator />
 
-          <q-separator />
-        </template>
-        <template v-else-if="section.section == 'Section 3'">
-          <GenAIChatDrawerIcon
-            v-for="item in section.items"
-            :key="item.label"
-            :item="item"
-            @click="activeComponent(item.label)"
-          />
-        </template>
-        <template v-else>
-          <GenAIChatDrawerIcon
-            v-for="item in section.items"
-            :key="item.label"
-            :item="item"
-            type="mdi-5"
-            @click="expandDrawer()"
-          />
-        </template>
-      </template>
+      <GenAIChatDrawerIcon
+        :item="{
+          icon: 'forum',
+          color: '#25282E',
+          label: 'Fourm',
+        }"
+        @click="activeComponent('Fourm')"
+      />
+      <GenAIChatDrawerIcon
+        :item="{
+          icon: 'mdi-arrow-expand',
+          color: '#25282E',
+        }"
+        type="mdi-5"
+        @click="expandDrawer()"
+      />
     </div>
   </div>
+  <q-dialog v-model="editor">
+    <GenAIChatEditarModal />
+  </q-dialog>
 </template>
 
 <script>
 import GenAIChatDrawerIcon from "src/components/genaichat/GenAIChatDrawerIcon.vue";
 import GenAIChatPage from "src/components/genaichat/GenAIChatPage.vue";
 import GenAIChatRecent from "src/components/genaichat/recent/GenAIChatRecent.vue";
+import GenAIChatEditarModal from "src/components/genaichat/editor/GenAIChatEditarModal.vue";
 import { mapGetters } from "vuex";
 
 // this comment used for to handle not usedcomponent importing warn
@@ -76,6 +101,7 @@ export default {
     GenAIChatDrawerIcon,
     GenAIChatPage,
     GenAIChatRecent,
+    GenAIChatEditarModal,
   },
   data() {
     return {
@@ -114,74 +140,7 @@ export default {
         },
         content: "shubham Recent Search ",
       },
-      toolkitItems: [
-        {
-          section: "Section 1",
-          items: [
-            {
-              label: "Ai",
-              routerLink: "",
-              icon: "auto_awesome",
-              color: "#25282E",
-            },
-            {
-              label: "Recent",
-              routerLink: "",
-              icon: "restore",
-              color: "#25282E",
-            },
-          ],
-        },
-        {
-          section: "Section 2",
-          items: [
-            {
-              label: "Add",
-              routerLink: "",
-              icon: "add",
-
-              color: "#25282E",
-            },
-            {
-              label: "Notification",
-              routerLink: "",
-              icon: "notifications_none",
-
-              color: "#25282E",
-            },
-            {
-              label: "Setting",
-              routerLink: "",
-              icon: "settings_suggest",
-
-              color: "#25282E",
-            },
-          ],
-        },
-        {
-          section: "Section 3",
-          items: [
-            {
-              label: "Chat",
-              routerLink: "",
-              icon: "forum",
-
-              color: "#25282E",
-            },
-          ],
-        },
-        {
-          section: "Section 4",
-          items: [
-            {
-              label: "expand",
-              routerLink: "",
-              icon: "mdi-arrow-expand",
-              color: "#25282E",
-            },
-          ],
-        },
-      ],
+      editor: false,
     };
   },
   methods: {

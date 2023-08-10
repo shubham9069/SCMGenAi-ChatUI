@@ -32,7 +32,7 @@
       <!-- // dropdown component -->
       <GenAIChatDropDown
         :dropDownToggle="dropDownToggle"
-        :dropDownList="['OperationX', 'OperationY']"
+        :dropDownList="dropDownList"
       />
     </q-btn-dropdown>
   </div>
@@ -69,6 +69,17 @@ export default {
     return {
       dropDownToggle: false,
       messageDate: "",
+      dropDownList: [
+        {
+          name: "Add to Editor",
+          func: () => {
+            return this.$store.dispatch(
+              "storedata/editorMessage",
+              this.message
+            );
+          },
+        },
+      ],
     };
   },
   methods: {

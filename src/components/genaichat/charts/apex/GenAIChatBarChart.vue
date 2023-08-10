@@ -1,5 +1,6 @@
 <template>
   <VueApexCharts
+    :id="chartid"
     width="100%"
     type="line"
     :options="options"
@@ -16,6 +17,10 @@ export default {
   },
   props: {
     graphArr: {
+      type: Array,
+      required: true,
+    },
+    chartid: {
       type: Array,
       required: true,
     },

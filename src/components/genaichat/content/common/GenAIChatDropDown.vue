@@ -5,9 +5,10 @@
       v-close-popup
       v-for="element in dropDownList"
       :key="element"
+      @click="element.func"
     >
       <q-item-section>
-        <q-item-label>{{ element }}</q-item-label>
+        <q-item-label>{{ element.name }}</q-item-label>
       </q-item-section>
     </q-item>
   </q-list>
@@ -23,10 +24,7 @@ export default {
     },
     dropDownList: {
       type: Array,
-      required: false,
-      defaultValue: () => {
-        return ["Pin"];
-      },
+      required: true,
     },
   },
   computed: {

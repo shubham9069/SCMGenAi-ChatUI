@@ -21,10 +21,10 @@
         borderless
       />
 
-      <div class="chat-icon" @click="speedReconization" v-if="mic">
+      <div class="chat-icon" @click="startRecognition" v-if="mic">
         <q-icon class="mdi mdi-microphone"></q-icon>
       </div>
-      <div class="chat-icon" @click="speedReconization" v-else>
+      <div class="chat-icon" @click="stopRecognition" v-else>
         <q-spinner-audio color="grey" />
       </div>
       <div class="chat-icon" @click="sentMessage">
@@ -51,6 +51,7 @@ export default {
       messageFile: "",
       inputText: "",
       mic: true,
+      recognition: null,
     };
   },
   methods: {
@@ -62,24 +63,25 @@ export default {
       this.$store.dispatch("storedata/sentMessage", this.inputText);
       this.inputText = "";
     },
-    speedReconization() {
-      let recognization = new webkitSpeechRecognition();
+    startRecognition() {
+      this.recognition = new webkitSpeechRecognition();
+      this.recognition.continuous = true;
+      this.recognition.onresult = (e) => {
+        var str = "";
+        var transcript = e.results[e.results.length - 1][0].transcript;
 
-      recognization.onresult = (e) => {
-        var transcript = e.results[0][0].transcript;
-        this.inputText += " " + transcript;
-
-        //  output.classList.remove("hide")
-        //  action.innerHTML = "";
+        this.inputText += transcript + " ";
       };
-      recognization.start();
-      recognization.onstart = () => {
+      this.recognition.start();
+      this.recognition.onstart = () => {
         this.mic = false;
       };
-      recognization.onspeechend = () => {
-        recognization.stop();
+    },
+    stopRecognition() {
+      if (this.recognition) {
+        this.recognition.stop();
         this.mic = true;
-      };
+      }
     },
   },
 };

@@ -26,4 +26,7 @@ export default {
   expandScreenToggle: ({ dispatch, commit }) => {
     commit("expandScreenToggle");
   },
+  editorMessage: ({ dispatch, commit }, params) => {
+    commit("editorMessage", params);
+  },
 };

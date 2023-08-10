@@ -63,6 +63,7 @@ export default {
       chart: true,
       chartInfo: {
         chartArr: [30, 40, 45, 50, 49, 60, 70, 91],
+        datauri: "",
       },
       id: state.chatMessages?.length + 1,
     });
@@ -93,5 +94,8 @@ export default {
   },
   expandScreenToggle: (state) => {
     state.expandScreen = !state.expandScreen;
+  },
+  editorMessage: (state, params) => {
+    state.editorMessage = params;
   },
 };
