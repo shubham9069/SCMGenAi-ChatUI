@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import GenAIChatMessageHeader from "src/components/genaichat/content/chatconversation/GenAIChatMessageHeader.vue";
-import GenAIChatMessageFooter from "src/components/genaichat/content/chatconversation/GenAIChatMessageFooter.vue";
-import GenAIChatMessageContainer from "src/components/genaichat/content/chatconversation/GenAIChatMessageContainer.vue";
-import GenAIPromptSuggestion from "src/components/genaichat/content/common/GenAIPromptSuggestion.vue";
+import GenAIChatMessageHeader from "./GenAIChatMessageHeader.vue";
+import GenAIChatMessageFooter from "./GenAIChatMessageFooter.vue";
+import GenAIChatMessageContainer from "./GenAIChatMessageContainer.vue";
+import GenAIPromptSuggestion from "../common/GenAIPromptSuggestion.vue";
 
 export default {
   name: "GenAIChatMessageUser",

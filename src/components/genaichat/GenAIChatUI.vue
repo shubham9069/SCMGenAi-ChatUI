@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import GenAIChatMessageAI from "src/components/genaichat/content/chatconversation/GenAIChatMessageAI.vue";
-import GenAIChatMessageUser from "src/components/genaichat/content/chatconversation/GenAIChatMessageUser.vue";
-import GenAIChatUInputBar from "src/components/genaichat/content/chatui/GenAIChatUInputBar.vue";
+import GenAIChatMessageAI from "./content/chatconversation/GenAIChatMessageAI.vue";
+import GenAIChatMessageUser from "./content/chatconversation/GenAIChatMessageUser.vue";
+import GenAIChatUInputBar from "./content/chatui/GenAIChatUInputBar.vue";
 import { mapGetters } from "vuex";
 
 export default {

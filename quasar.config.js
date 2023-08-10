@@ -66,45 +66,45 @@ module.exports = configure(function (ctx) {
       // transpile: false,
       // publicPath: '/',
 
-      // extendWebpack(cfg) {
-      //   // Input and output
-      //   cfg.entry.app = "./src/index.js";
-      //   cfg.output = {
-      //     path: path.resolve(__dirname, "dist"),
-      //     filename: "lib-[id].js",
-      //     library: "MyLibrary", // Replace with your library name
-      //     libraryTarget: "umd",
-      //     globalObject: "this", // Fixes issues with Universal Module Definition (UMD)
-      //   };
+      extendWebpack(cfg) {
+        // Input and output
+        cfg.entry.app = "./src/index.js";
+        cfg.output = {
+          path: path.resolve(__dirname, "dist"),
+          filename: "lib-[id].js",
+          library: "MyLibrary", // Replace with your library name
+          libraryTarget: "umd",
+          globalObject: "this", // Fixes issues with Universal Module Definition (UMD)
+        };
 
-      //   // External dependencies
-      //   cfg.externals = {
-      //     vue: "Vue", // Specify external dependencies
-      //   };
-      //   cfg.optimization = {
-      //     minimizer: [
-      //       new TerserPlugin({
-      //         terserOptions: {
-      //           format: {
-      //             comments: false, // Remove comments from output
-      //           },
-      //         },
-      //         extractComments: false, // Do not extract comments to a separate file
-      //       }),
-      //     ],
-      //   };
-      //   cfg.module.rules.push({
-      //     test: /\.js$/,
-      //     exclude: /node_modules/,
-      //     loader: "babel-loader",
-      //   });
-      //   cfg.resolve.alias = {
-      //     ...cfg.resolve.alias, // This adds the existing alias
+        // External dependencies
+        cfg.externals = {
+          vue: "Vue", // Specify external dependencies
+        };
+        cfg.optimization = {
+          minimizer: [
+            new TerserPlugin({
+              terserOptions: {
+                format: {
+                  comments: false, // Remove comments from output
+                },
+              },
+              extractComments: false, // Do not extract comments to a separate file
+            }),
+          ],
+        };
+        cfg.module.rules.push({
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: "babel-loader",
+        });
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias, // This adds the existing alias
 
-      //     // This will make sure that the hosting test app is pointing to only one instance of vue.
-      //     vue: path.resolve("./node_modules/vue"),
-      //   };
-      // },
+          // This will make sure that the hosting test app is pointing to only one instance of vue.
+          vue: path.resolve("./node_modules/vue"),
+        };
+      },
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
       // Applies only if "transpile" is set to true.

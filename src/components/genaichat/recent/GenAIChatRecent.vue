@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import GenAIChatHeader from "src/components/genaichat/header/GenAIChatHeader.vue";
+import GenAIChatHeader from "../header/GenAIChatHeader.vue";
 
 export default {
   name: "GenAIChatRecent",

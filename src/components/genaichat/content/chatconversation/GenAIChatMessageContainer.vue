@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import GenAIChatBarChart from "src/components/genaichat/charts/apex/GenAIChatBarChart.vue";
+import GenAIChatBarChart from "../../charts/apex/GenAIChatBarChart.vue";
 import { mapGetters } from "vuex";
 
 export default {

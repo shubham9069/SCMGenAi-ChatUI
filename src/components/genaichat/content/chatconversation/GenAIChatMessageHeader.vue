@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import GenAIChatDropDown from "src/components/genaichat/content/common/GenAIChatDropDown.vue";
+import GenAIChatDropDown from "../common/GenAIChatDropDown.vue";
 import moment from "moment";
 import { mapGetters } from "vuex";
 import { setTransitionHooks } from "vue";

@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import GenAIChatHeader from "src/components/genaichat/header/GenAIChatHeader.vue";
-import GenAIChatLanding from "src/components/genaichat/content/landing/GenAIChatLanding.vue";
-import GenAIChatUI from "src/components/genaichat/GenAIChatUI.vue";
+import GenAIChatHeader from "./header/GenAIChatHeader.vue";
+import GenAIChatLanding from "./content/landing/GenAIChatLanding.vue";
+import GenAIChatUI from "./GenAIChatUI.vue";
 import { mapGetters } from "vuex";
 
 export default {

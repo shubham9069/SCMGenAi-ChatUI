@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import GenAIChatDrawer from "src/components/genaichat/GenAIChatDrawer.vue";
+import GenAIChatDrawer from "./components/genaichat/GenAIChatDrawer.vue";
 /* eslint-disable vue/no-unused-components */
 
 export default {

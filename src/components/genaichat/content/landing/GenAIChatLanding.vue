@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import GenAIPromptSuggestion from "src/components/genaichat/content/common/GenAIPromptSuggestion.vue";
-import GenAIChatLandingActionButtons from "src/components/genaichat/content/landing/GenAIChatLandingActionButtons.vue";
+import GenAIPromptSuggestion from "../common/GenAIPromptSuggestion.vue";
+import GenAIChatLandingActionButtons from "./GenAIChatLandingActionButtons.vue";
 import { mapGetters } from "vuex";
 
 export default {

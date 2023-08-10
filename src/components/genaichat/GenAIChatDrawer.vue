@@ -86,10 +86,10 @@
 </template>
 
 <script>
-import GenAIChatDrawerIcon from "src/components/genaichat/GenAIChatDrawerIcon.vue";
-import GenAIChatPage from "src/components/genaichat/GenAIChatPage.vue";
-import GenAIChatRecent from "src/components/genaichat/recent/GenAIChatRecent.vue";
-import GenAIChatEditarModal from "src/components/genaichat/editor/GenAIChatEditarModal.vue";
+import GenAIChatDrawerIcon from "./GenAIChatDrawerIcon.vue";
+import GenAIChatPage from "./GenAIChatPage.vue";
+import GenAIChatRecent from "./recent/GenAIChatRecent.vue";
+import GenAIChatEditarModal from "./editor/GenAIChatEditarModal.vue";
 import { mapGetters } from "vuex";
 
 // this comment used for to handle not usedcomponent importing warn

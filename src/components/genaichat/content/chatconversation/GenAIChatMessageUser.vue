@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import GenAIChatMessageHeader from "src/components/genaichat/content/chatconversation/GenAIChatMessageHeader.vue";
-import GenAIChatMessageContainer from "src/components/genaichat/content/chatconversation/GenAIChatMessageContainer.vue";
+import GenAIChatMessageHeader from "./GenAIChatMessageHeader.vue";
+import GenAIChatMessageContainer from "./GenAIChatMessageContainer.vue";
 
 export default {
   name: "GenAIChatMessageUser",
