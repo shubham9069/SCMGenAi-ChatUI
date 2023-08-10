@@ -88,8 +88,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
-
 .action-button-container {
   margin-bottom: 20px;
 }

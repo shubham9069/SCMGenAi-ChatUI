@@ -50,7 +50,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
 .header {
   padding: 1rem;
   display: flex;

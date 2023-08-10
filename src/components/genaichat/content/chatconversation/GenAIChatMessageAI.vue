@@ -81,7 +81,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
 .wrapper-ai {
   width: var(--hds-chatbox-warpper-input-width);
   display: flex;

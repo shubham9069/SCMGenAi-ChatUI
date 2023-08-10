@@ -45,8 +45,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
-
 .wrapper-user .chat-ai {
   background: var(--hds-chatbox-container-chat-background);
 }

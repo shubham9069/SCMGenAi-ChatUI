@@ -119,7 +119,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
 .ai-profile-head {
   display: grid;
   grid-template-columns: var(

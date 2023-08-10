@@ -25,7 +25,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
 .tag-button {
   padding: var(--hds-chatbox-TagButton-padding);
   font-weight: var(--hds-chatbox-TagButton-font-weight);

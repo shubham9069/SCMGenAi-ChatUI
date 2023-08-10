@@ -60,7 +60,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
 .chat-landing {
   padding: calc(2 * var(--hds-chatbox-padding));
   background: var(--hds-chatbox-background);

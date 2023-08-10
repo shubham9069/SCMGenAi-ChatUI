@@ -88,7 +88,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
 .chat-form {
   width: var(--hds-chatbox-form-width);
   height: var(--hds-chatbox-form-height);

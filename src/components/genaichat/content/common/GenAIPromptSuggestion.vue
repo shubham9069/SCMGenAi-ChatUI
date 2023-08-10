@@ -17,8 +17,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
-
 .chat-container .suggestion-box > .chat-box-suggestion-div {
   margin: 0;
 }

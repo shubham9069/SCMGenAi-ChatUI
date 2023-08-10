@@ -113,8 +113,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
-
 .chat-landing-header {
   display: flex;
   flex-direction: column;

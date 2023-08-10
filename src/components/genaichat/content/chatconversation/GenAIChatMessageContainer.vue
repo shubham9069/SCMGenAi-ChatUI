@@ -58,7 +58,6 @@ export default {
 </script>
 
 <style>
-@import "src/assets/css/variable.css";
 .q-message {
   width: 100% !important;
   margin: 8px 0;
