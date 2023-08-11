@@ -93,9 +93,14 @@ export default {
     state.landingToggle = true;
   },
   expandScreenToggle: (state) => {
+    state.editor = false;
     state.expandScreen = !state.expandScreen;
   },
   editorMessage: (state, params) => {
+    state.editor = true;
     state.editorMessage = params;
+  },
+  editor: (state, params) => {
+    state.editor = params;
   },
 };

@@ -5,7 +5,6 @@
         type="Ai"
         :message="message"
         :collapseChat="collapseChat"
-        @collapseMessageContainer="toggleContainerFunc"
       />
 
       <div v-if="collapseChat">
@@ -25,6 +24,8 @@ import GenAIChatMessageHeader from "./GenAIChatMessageHeader.vue";
 import GenAIChatMessageFooter from "./GenAIChatMessageFooter.vue";
 import GenAIChatMessageContainer from "./GenAIChatMessageContainer.vue";
 import GenAIPromptSuggestion from "../common/GenAIPromptSuggestion.vue";
+
+import eventBus from "../../eventBus";
 
 export default {
   name: "GenAIChatMessageUser",
@@ -71,6 +72,9 @@ export default {
         },
       ],
     };
+  },
+  created() {
+    eventBus.on("collapseMessageContainer", this.toggleContainerFunc);
   },
   methods: {
     toggleContainerFunc() {

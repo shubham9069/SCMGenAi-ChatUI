@@ -38,7 +38,6 @@
 /* eslint-disable vue/no-unused-components */
 export default {
   name: "GenAIChatUInputBar",
-  emits: ["inputValueChatUi"],
   props: {
     inputBoxPlaceholder: {
       type: String,

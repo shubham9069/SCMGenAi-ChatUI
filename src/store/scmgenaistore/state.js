@@ -7,5 +7,6 @@ export default function () {
     landingToggle: true,
     expandScreen: false,
     editorMessage: {},
+    editor: false,
   };
 }

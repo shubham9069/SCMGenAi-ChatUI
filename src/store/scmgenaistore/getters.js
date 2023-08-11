@@ -20,4 +20,7 @@ export default {
   get_editorMessage: (state) => {
     return state.editorMessage;
   },
+  get_editor: (state) => {
+    return state.editor;
+  },
 };

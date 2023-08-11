@@ -2,6 +2,9 @@
   <div class="chat-drawer">
     <!-- left sidebox  -->
     <section class="sidebox" :style="{ display: getVisible }">
+      <template v-if="get_editor">
+        <GenAIChatEditarModal />
+      </template>
       <div class="bottom">
         <keep-alive>
           <GenAIChatPage v-bind="chatProps" v-if="get_selectedLabel == 'Ai'" />
@@ -57,7 +60,7 @@
           color: '#25282E',
           label: 'Setting',
         }"
-        @click="this.editor = true"
+        @click="openEditorModal"
       />
 
       <q-separator />
@@ -80,9 +83,6 @@
       />
     </div>
   </div>
-  <q-dialog v-model="editor">
-    <GenAIChatEditarModal />
-  </q-dialog>
 </template>
 
 <script>
@@ -140,7 +140,6 @@ export default {
         },
         content: "shubham Recent Search ",
       },
-      editor: false,
     };
   },
   methods: {
@@ -152,11 +151,20 @@ export default {
         this.$store.dispatch("storedata/expandScreenToggle");
       }
     },
+    openEditorModal() {
+      if (this.get_isVisible) {
+        this.$store.dispatch(
+          "storedata/editor",
+          this.get_editor ? false : true
+        );
+      }
+    },
   },
   computed: {
     ...mapGetters({
       get_isVisible: "storedata/get_isVisible",
       get_selectedLabel: "storedata/get_selectedLabel",
+      get_editor: "storedata/get_editor",
     }),
     getVisible() {
       return this.get_isVisible ? "Block" : "none";
@@ -176,15 +184,15 @@ export default {
   /* background: grey; */
   height: 100vh;
   display: flex;
-
+  position: relative;
   width: 100%;
   justify-content: flex-end;
 }
 
 .sidebox {
   height: 100%;
-
-  width: 100%;
+  position: relative;
+  /* width: 100%; */
   border: 1px solid #e7ecf1;
 }
 .toolbar {

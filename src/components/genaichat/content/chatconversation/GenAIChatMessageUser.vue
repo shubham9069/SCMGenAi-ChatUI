@@ -19,6 +19,8 @@
 import GenAIChatMessageHeader from "./GenAIChatMessageHeader.vue";
 import GenAIChatMessageContainer from "./GenAIChatMessageContainer.vue";
 
+import eventBus from "../../eventBus";
+
 export default {
   name: "GenAIChatMessageUser",
   components: {
@@ -29,6 +31,9 @@ export default {
     return {
       collapseChat: true,
     };
+  },
+  created() {
+    eventBus.on("collapseMessageContainer", this.toggleContainerFunc);
   },
   methods: {
     toggleContainerFunc() {

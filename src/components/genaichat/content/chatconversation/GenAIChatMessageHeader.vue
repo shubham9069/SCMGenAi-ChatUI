@@ -18,7 +18,7 @@
     <q-icon
       class="material-icons iconSize"
       :style="collapse"
-      @click="$emit('collapseMessageContainer')"
+      @click="emitClickEvent"
     >
       keyboard_arrow_down
     </q-icon>
@@ -44,6 +44,7 @@ import GenAIChatDropDown from "../common/GenAIChatDropDown.vue";
 import moment from "moment";
 import { mapGetters } from "vuex";
 import { setTransitionHooks } from "vue";
+import eventBus from "../../eventBus";
 
 export default {
   name: "GenAIChatMessageHeader",
@@ -89,6 +90,9 @@ export default {
 
     dropDownToggleFunc() {
       return (this.dropDownToggle = !this.dropDownToggle);
+    },
+    emitClickEvent() {
+      eventBus.emit("collapseMessageContainer");
     },
   },
   computed: {

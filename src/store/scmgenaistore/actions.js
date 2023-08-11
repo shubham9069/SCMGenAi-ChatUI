@@ -29,4 +29,7 @@ export default {
   editorMessage: ({ dispatch, commit }, params) => {
     commit("editorMessage", params);
   },
+  editor: ({ dispatch, commit }, params) => {
+    commit("editor", params);
+  },
 };
