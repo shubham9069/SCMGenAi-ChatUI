@@ -15,7 +15,7 @@
     "@quasar/extras": "^1.16.4",
     "core-js": "^3.6.5",
     "quasar": "^2.6.0",
-    "scm-ui": "git+https://@seyc.visualstudio.com/DefaultCollection/SCM%20GenAI%20New%20ChatUI/_git/scmgenai-chatui#36a746ba43a149a47edbc19517a97b7135a014e0",
+    "scm-ui": "git+https://@seyc.visualstudio.com/DefaultCollection/SCM%20GenAI%20New%20ChatUI/_git/scmgenai-chatui#57b3aaa5ea3c106a6013035844e4343f7ebe680f",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0",
     "vuex": "^4.0.1"
