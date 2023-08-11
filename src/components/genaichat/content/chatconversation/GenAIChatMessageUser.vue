@@ -33,7 +33,7 @@ export default {
     };
   },
   created() {
-    eventBus.on("collapseMessageContainer", this.toggleContainerFunc);
+    eventBus.on("collapseMessageContainerUser", this.toggleContainerFunc);
   },
   methods: {
     toggleContainerFunc() {

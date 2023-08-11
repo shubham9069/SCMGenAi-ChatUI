@@ -74,7 +74,7 @@ export default {
     };
   },
   created() {
-    eventBus.on("collapseMessageContainer", this.toggleContainerFunc);
+    eventBus.on("collapseMessageContainerAi", this.toggleContainerFunc);
   },
   methods: {
     toggleContainerFunc() {
