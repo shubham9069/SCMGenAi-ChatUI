@@ -2,9 +2,9 @@
   <div class="chat-drawer">
     <!-- left sidebox  -->
     <section class="sidebox" :style="{ display: getVisible }">
-      <template v-if="get_editor">
+      <!-- <template v-if="get_editor">
         <GenAIChatEditarModal />
-      </template>
+      </template> -->
       <div class="bottom">
         <keep-alive>
           <GenAIChatPage v-bind="chatProps" v-if="get_selectedLabel == 'Ai'" />

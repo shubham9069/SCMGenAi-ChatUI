@@ -74,11 +74,13 @@ export default {
     };
   },
   created() {
-    eventBus.on("collapseMessageContainerAi", this.toggleContainerFunc);
+    eventBus.on("collapseMessageContainer", this.toggleContainerFunc);
   },
   methods: {
-    toggleContainerFunc() {
-      return (this.collapseChat = !this.collapseChat);
+    toggleContainerFunc(id) {
+      if (this.message.id == id) {
+        this.collapseChat = !this.collapseChat;
+      }
     },
   },
 };

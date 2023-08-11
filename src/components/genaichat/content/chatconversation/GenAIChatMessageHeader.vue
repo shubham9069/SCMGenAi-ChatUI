@@ -92,11 +92,7 @@ export default {
       return (this.dropDownToggle = !this.dropDownToggle);
     },
     emitClickEvent() {
-      eventBus.emit(
-        this.type == "Ai"
-          ? "collapseMessageContainerAi"
-          : "collapseMessageContainerUser"
-      );
+      eventBus.emit("collapseMessageContainer", this.message.id);
     },
   },
   computed: {
