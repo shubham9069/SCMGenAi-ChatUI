@@ -192,7 +192,7 @@ export default {
 .sidebox {
   height: 100%;
   position: relative;
-  /* width: 100%; */
+  width: 100%;
   border: 1px solid #e7ecf1;
 }
 .toolbar {

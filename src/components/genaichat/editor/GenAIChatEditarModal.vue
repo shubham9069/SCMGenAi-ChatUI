@@ -96,7 +96,7 @@ export default {
 }
 .modal-container {
   position: absolute;
-
+  z-index: 1111111 !important;
   width: 100%;
   min-width: 400px;
   right: 100%;
