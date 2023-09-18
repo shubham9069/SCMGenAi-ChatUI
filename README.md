@@ -14,7 +14,9 @@ npm run build
 
 ### to link 
 ```bash
-npm link 
+npm link throught a github uril git url and using local npm link
+example:-
+"scm-ui": "git+https://"git-path"/scmgenai-chatui#"commit hash value' ",
 ```
 
 after link delete node_module from lib application  
